@@ -85,6 +85,7 @@ google_analytics:
   site: ## e.g. yangjian.me your google analytics site or set the value as auto.
 ## You MUST upgrade to Universal Analytics first!
 ## https://developers.google.com/analytics/devguides/collection/upgrade/?hl=zh_CN
+baidu_tongji: true
 
 #### Custom Search
 google_cse: 
