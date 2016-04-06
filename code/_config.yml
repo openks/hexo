@@ -6,7 +6,7 @@
 title: openks的随笔记录
 subtitle:
 description: openks的小站,前端开发,前端,js,nodejs,css,less,html,jquery,react,gulp,fis
-author: openks
+author: 朱阳星
 language: zh-CN
 timezone:
 
@@ -41,7 +41,7 @@ highlight:
   enable: true
   line_number: true
   auto_detect: false
-  tab_replace:
+  tab_replace: "&nbsp;&nbsp;"
 
 # Category & Tag
 default_category: uncategorized
