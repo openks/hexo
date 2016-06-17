@@ -4,7 +4,7 @@ date: 2016-4-1 16:46:46
 tags: [前端]
 categories: [前端]
 description: 写js代码常见问题
-keywords: []
+keywords: [前端，jslint,js,常见错误]
 ---
 
 主要包括以下几个方面问题
@@ -36,7 +36,7 @@ if(check_flag == false)
 
 static\js\forget.js: line 145, col 23, Use '===' to compare with '0'.
 
-if (waitemail == 0) 
+if (waitemail == 0)
 
 //类型确定的比较最好使用=== 我还是常用== 习惯应该改正了
 
@@ -44,7 +44,7 @@ static\js\data-schedule.js: line 129, col 56, Script URL.
 
 $('.lt').attr('href', 'javascript:queryMatchs('+up+',1)');
 
-//href里写javascript: 这种写法我从来没想到过，我想的是给a标签添加click事件 
+//href里写javascript: 这种写法我从来没想到过，我想的是给a标签添加click事件
 
 iframe.src == "javascript:'%3Chtml%3E%3C/html%3E';"
 //src里写javascript:
@@ -53,7 +53,7 @@ static\js\data-schedule.js: line 164, col 6, Missing semicolon.
 //缺少分号 这个我一般都不会少的
 static\js\data-schedule.js: line 168, col 13, Bad line breaking before '-'.
 
-str.substr(4 
+str.substr(4
 - RegExp.$1.length));
 
 //话说这种断行我是第一次见 两行变一行就行了
@@ -76,7 +76,7 @@ document.writeln('</div>')
 
 static\js\forget.js: line 168, col 14, Expected an assignment or function call and instead saw an expression.
 
-var wait=90; 
+var wait=90;
 timeB = false,
 scountdown = false; // line 168
 
