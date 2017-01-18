@@ -1,10 +1,10 @@
 ---
-title: gulp自动化工具的学习
-date: 2016-3-11 13:25:51
-tags: [前端]
-categories: [前端]
-description: gulp自动化构建工具的使用
-keywords: [gulp,自动化构建]
+title: gulp自动化工具的学习  
+date: 2016-3-11 13:25:51  
+tags: [前端]  
+categories: [前端]  
+description: gulp自动化构建工具的使用  
+keywords: [gulp,自动化构建]  
 ---
 
 
@@ -184,5 +184,24 @@ gulp.task('watch', function() {
 把`gulp.js`放在项目根目录，在项目根目录运行 `gulp & gulp watch` 就会自动进行构建。
 用到插件如图：
 ![图片](http://7xl9u9.com1.z0.glb.clouddn.com/glup.png)
+
+### gulp 4.0  
+```
+# 卸载全局的 gulp
+$ npm uninstall gulp -g 
+# 安装全局的 gulp 4.0 
+$ npm install "gulpjs/gulp-cli#4.0" -g 
+$ npm install "gulpjs/gulp#4.0" -g  
+# 到项目目录里删掉本地的 gulp
+$ npm rm gulp --save-dev 
+# 安装本地的 gulp 4.0
+$ npm install "gulpjs/gulp#4.0" --save-dev
+```
+ 4.0主要增加了`gulp.series`和`gulp.parallel`两个方法。  
+`gulp.series`里的任务是顺序执行的。   
+`gulp.parallel`里的任务是同时执行的。
+
+关于gulp4.0[更多](http://web.jobbole.com/82992/)信息
+
 
 如有不对的地方还望各位看官给予指正。
