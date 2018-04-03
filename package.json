@@ -1,0 +1,23 @@
+{
+  "name": "hexo",
+  "version": "1.0.0",
+  "description": "个人写静态博客使用项目",
+  "main": "index.js",
+  "dependencies": {
+    "hexo": "^3.1.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/openks/hexo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/openks/hexo/issues"
+  },
+  "homepage": "https://github.com/openks/hexo#readme"
+}
