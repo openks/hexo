@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+  - stable
+install:
+  - cd code
+  - npm install
+script:
+  - hexo generate
+after_success:
+  - bash deploy.sh
+env:
+  global:
+    - secure: "crSDrsew3Q+Ox7ilBTopoQOl6AkQgR35u8sdPu+YRELZvbVUePbfTjAvSKFklBC3U12crrc0RGiVZTdLK+4x9L2K8qVGIcmotZDAuluHqBXlbu8NpqSf7Sd56R09JCllvs3eNjdHgNAb++pD5k/j/OCDqmlE7s83PNGqC2kjkq1riqreRTm1YHhh7GDgplMB53kProetNHAdrefu+Zpr73xyO0pjI/OnYTc8NRXynvYSRKjXyuwiYdHBPrdxLzsaUpGjZ/LGkhpdHPVug2YQz1+E2+J2HiL/VfY2mJnOSt4YmuHVOOxbqso2EwlXWOawOGHEWtDu9AafgFJY7xmYjJZ4RsKnTTqVdlP5J7b5iVmvfZBt9XXJkP1bK5FS4Ym9P8c1G8G7SnCLa9xGdBrAhU30zbGtnXOlY8zmVbBArm1C1WFFa7iRuFR3/fsCdT9nzRChoBwZKDQb/a7N0zRGgQmpp/SxugPkdPCI7clv5vqyn7O664tCdqbBUGWZ9sBmRXpmBUrXuF7D7l8ZSXpApp4bvY0Z5RG6GaCZb2pbBSGMz9weuq1tlcrndEvcjlXfC02NTjOPNgpjKT6EXyc3+Lie/kCDsWf3qKN26wZMeAdB8DlFsGNTVmxCRnQ9F7B4VrNfYptE2/QJ/QRe1nHK4oGx5SrR0QLmzZlge9q+Sto="
