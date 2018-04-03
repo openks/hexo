@@ -1,0 +1,357 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>hexo博客搭建 | 朱阳星的日常</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="朱阳星">
+    
+    <meta name="description" itemprop="description" content="hexo博客搭建相关信息及插件配置等">
+    
+    <meta name="keywords" content="hexo搭建,pacman代码高亮,pacman,个人博客搭建">
+    
+    
+    <link rel="alternate" href="/atom.xml" title="朱阳星的日常" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+<script type="text/javascript">
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?a0056a3043f21f699150e6a4b66104ef";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</head>
+
+  <body>
+    <header>
+      <div>
+	
+		<div id="imglogo">
+			<a href="/"><img src="/img/logo.svg" alt="朱阳星的日常" title="朱阳星的日常"/></a>
+		</div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="朱阳星的日常">朱阳星的日常</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar">
+				<a class="navbutton navmobile" href="#" title="菜单">
+				</a>
+			</div>
+			<nav class="animated">
+				<ul>
+					
+						<li>
+							<a href="/">
+								首页
+							</a>
+						</li>
+						
+						<li>
+							<a href="/archives">
+								存档
+							</a>
+						</li>
+						
+						<li>
+							<a href="/demo.html">
+								栗子
+							</a>
+						</li>
+						
+							<li>
+								
+										<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+											<label>Search</label>
+											<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+											<input type="hidden" name="q" value="site:www.zhuyangxing.cn">
+										</form>
+										
+							</li>
+				</ul>
+			</nav>
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/02/25/hexo博客搭建/" title="hexo博客搭建" itemprop="url">hexo博客搭建</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://www.zhuyangxing.cn" title="朱阳星">朱阳星</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2016-02-25T16:05:26.000Z" itemprop="datePublished">2016-02-25 16:05</time>
+    <!-- 更新日期:<time datetime="2018-04-03T07:17:03.091Z" itemprop="dateModified">2018-04-03 07:17</time>
+     -->
+  </p>
+</header>
+
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装hexo"><span class="toc-number">1.</span> <span class="toc-text">安装hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建新博客"><span class="toc-number">1.1.</span> <span class="toc-text">创建新博客</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#启动服务"><span class="toc-number">1.2.</span> <span class="toc-text">启动服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#生成静态文件"><span class="toc-number">1.3.</span> <span class="toc-text">生成静态文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#部署到github-io"><span class="toc-number">1.4.</span> <span class="toc-text">部署到github.io</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更换主题pacman"><span class="toc-number">1.5.</span> <span class="toc-text">更换主题pacman</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#英文改中文"><span class="toc-number">1.6.</span> <span class="toc-text">英文改中文</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除文章下面的默认分享"><span class="toc-number">1.7.</span> <span class="toc-text">删除文章下面的默认分享</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pacman代码高亮"><span class="toc-number">1.8.</span> <span class="toc-text">pacman代码高亮</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hexo使用css预处理styl文件"><span class="toc-number">1.9.</span> <span class="toc-text">hexo使用css预处理styl文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rss订阅"><span class="toc-number">1.10.</span> <span class="toc-text">rss订阅</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#网站地图"><span class="toc-number">1.11.</span> <span class="toc-text">网站地图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#百度统计"><span class="toc-number">1.12.</span> <span class="toc-text">百度统计</span></a></li></ol></li></ol>
+		</div>
+		
+		<h2 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h2><h3 id="创建新博客"><a href="#创建新博客" class="headerlink" title="创建新博客"></a>创建新博客</h3><p>在F:\hexo\code文件夹中使用如下命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo -g</span><br><span class="line">$ <span class="built_in">cd</span> f:</span><br><span class="line">$ <span class="built_in">cd</span> F:\hexo</span><br><span class="line">$ hexo code</span><br></pre></td></tr></table></figure></p>
+<h3 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h3><p>在F:\hexo\code目录下使用命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure></p>
+<h3 id="生成静态文件"><a href="#生成静态文件" class="headerlink" title="生成静态文件"></a>生成静态文件</h3><p>在F:\hexo\code目录下使用命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure></p>
+<h3 id="部署到github-io"><a href="#部署到github-io" class="headerlink" title="部署到github.io"></a>部署到github.io</h3><p>把public下面的所有文件都复制到username.github.io项目的根目录</p>
+<h3 id="更换主题pacman"><a href="#更换主题pacman" class="headerlink" title="更换主题pacman"></a>更换主题pacman</h3><p>下载<a href="https://github.com/A-limon/pacman" target="_blank" rel="noopener">pacman</a>主题,下载zip压缩包即可<br>把压缩包下载完成后解压并修改pacman-master为pacman,并把该目录放到F:\hexo\code\themes目录下<br>修改F:\hexo\code_config.yml文件里的theme为pacman即<code>theme: pacman</code>(中间空格不能少)</p>
+<h3 id="英文改中文"><a href="#英文改中文" class="headerlink" title="英文改中文"></a>英文改中文</h3><p>修改F:\hexo\code_config.yml文件里的language<code>language: zh-CN</code><br>修改theme\pacman\layout\index.ejs文件 (这里pacman作者写成字符串了)<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">prev_text: <span class="string">'&amp;laquo; Prev'</span>,</span><br><span class="line">next_text: <span class="string">'Next &amp;raquo;'</span></span><br></pre></td></tr></table></figure></p>
+<p>修改为<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">prev_text: <span class="string">'&amp;laquo;'</span>+__(<span class="string">'prev'</span>),</span><br><span class="line">next_text: __(<span class="string">'next'</span>)+<span class="string">'&amp;raquo;'</span></span><br></pre></td></tr></table></figure></p>
+<p>其他类似未修改的地方与此相似，prev，next是在themes\pacman\languages 下面的zh-CN.yml文件里有配置的。</p>
+<h3 id="删除文章下面的默认分享"><a href="#删除文章下面的默认分享" class="headerlink" title="删除文章下面的默认分享"></a>删除文章下面的默认分享</h3><p>themes\pacman\layout_partial\post\footer.ejs文件里注释掉相关代码即可<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- </span></span><br><span class="line"><span class="comment">&lt;div data-url="&lt;%- item.permalink %&gt;" data-title="&lt;% if (item.title)&#123; %&gt;&lt;%= item.title %&gt; | &lt;% &#125; %&gt;&lt;%= config.title %&gt;" data-tsina="&lt;%= theme.author.tsina %&gt;" class="share clearfix"&gt;</span></span><br><span class="line"><span class="comment">&lt;/div&gt;</span></span><br><span class="line"><span class="comment">--&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="pacman代码高亮"><a href="#pacman代码高亮" class="headerlink" title="pacman代码高亮"></a>pacman代码高亮</h3><p>在themes/pacman/source/css/_base/variable.styl 文件里注释掉highlight = hexo-config(“highlight.enable”)即可</p>
+<h3 id="hexo使用css预处理styl文件"><a href="#hexo使用css预处理styl文件" class="headerlink" title="hexo使用css预处理styl文件"></a>hexo使用css预处理styl文件</h3><p>语法简单,使用缩进表示层级关系</p>
+<h3 id="rss订阅"><a href="#rss订阅" class="headerlink" title="rss订阅"></a>rss订阅</h3><p>安装插件hexo-generator-feed,修改themes/pacman/_config.yml文件的rss,<code>rss: /atom.xml</code>.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install --save hexo-generator-feed</span><br></pre></td></tr></table></figure></p>
+<h3 id="网站地图"><a href="#网站地图" class="headerlink" title="网站地图"></a>网站地图</h3><p>安装插件hexo-generator-sitemap.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install --save hexo-generator-sitemap</span><br></pre></td></tr></table></figure></p>
+<p>安装完插件后都要重启服务，重启办法先暂停再启动： <code>ctrl+c</code>暂停服务,<code>hexo s</code>启动服务，端口默认4000</p>
+<h3 id="百度统计"><a href="#百度统计" class="headerlink" title="百度统计"></a>百度统计</h3><p>编辑文件hexo\themes\pacman_config.yml，增加配置选项(中间的空格绝对不能忘):<br>baidu_tongji: true<br>新建文件hexo\themes\pacman\layout_partial\baidu_tongji.ejs，内容如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;% if (theme.baidu_tongji)&#123; %&gt;</span><br><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">#你的百度统计代码</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;% &#125; %&gt;</span><br></pre></td></tr></table></figure></p>
+<p>注册并登录百度统计获取你的统计代码。<br>编辑文件hexo\themes\pacman\layout_partial\head.ejs，在『/head』之前增加：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%- partial(&apos;baidu_tongji&apos;) %&gt;</span><br></pre></td></tr></table></figure></p>
+<p>重新生成并部署你的站点。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/hexo/">hexo</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/hexo/">hexo</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <!--<div data-url="http://www.zhuyangxing.cn/2016/02/25/hexo博客搭建/" data-title="hexo博客搭建 | 朱阳星的日常" data-tsina="null" class="share clearfix">
+  </div>-->
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/02/26/webpack/" title="webpack入门学习">
+  <strong>上一篇:</strong><br/>
+  <span>
+  webpack入门学习</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/02/25/Chrome 开发者工具的技巧/"  title="Chrome 开发者工具的技巧">
+ <strong>下一篇:</strong><br/> 
+ <span>Chrome 开发者工具的技巧
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装hexo"><span class="toc-number">1.</span> <span class="toc-text">安装hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建新博客"><span class="toc-number">1.1.</span> <span class="toc-text">创建新博客</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#启动服务"><span class="toc-number">1.2.</span> <span class="toc-text">启动服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#生成静态文件"><span class="toc-number">1.3.</span> <span class="toc-text">生成静态文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#部署到github-io"><span class="toc-number">1.4.</span> <span class="toc-text">部署到github.io</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更换主题pacman"><span class="toc-number">1.5.</span> <span class="toc-text">更换主题pacman</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#英文改中文"><span class="toc-number">1.6.</span> <span class="toc-text">英文改中文</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除文章下面的默认分享"><span class="toc-number">1.7.</span> <span class="toc-text">删除文章下面的默认分享</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pacman代码高亮"><span class="toc-number">1.8.</span> <span class="toc-text">pacman代码高亮</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hexo使用css预处理styl文件"><span class="toc-number">1.9.</span> <span class="toc-text">hexo使用css预处理styl文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rss订阅"><span class="toc-number">1.10.</span> <span class="toc-text">rss订阅</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#网站地图"><span class="toc-number">1.11.</span> <span class="toc-text">网站地图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#百度统计"><span class="toc-number">1.12.</span> <span class="toc-text">百度统计</span></a></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/css/" title="css">css<sup>1</sup></a></li>
+		
+			<li><a href="/tags/hexo/" title="hexo">hexo<sup>2</sup></a></li>
+		
+			<li><a href="/tags/vue/" title="vue">vue<sup>1</sup></a></li>
+		
+			<li><a href="/tags/前端/" title="前端">前端<sup>15</sup></a></li>
+		
+			<li><a href="/tags/工具/" title="工具">工具<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/archives">归档</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">4</span></li></ul>
+  </div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+      <li><a href="http://www.zhangxinxu.com" target="_blank" title="张鑫旭">张鑫旭</a></li>
+      <li><a href="http://hexo.io" target="_blank" title="Hexo">Hexo</a></li>
+    </ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer">
+			<div class="bottom">
+				<div class="word">
+					Copyright 2015 zhuyangxing.cn AllRights Reserved.
+				</div>
+			</div>
+		<script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=10861255704412712674' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>

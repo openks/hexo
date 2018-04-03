@@ -1,0 +1,343 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Building APIs with Node.js一书阅读问题汇总 | 朱阳星的日常</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="朱阳星">
+    
+    <meta name="description" itemprop="description" content="Building APIs with Node.js 遇到问题汇总">
+    
+    
+    
+    
+    <link rel="alternate" href="/atom.xml" title="朱阳星的日常" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+<script type="text/javascript">
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?a0056a3043f21f699150e6a4b66104ef";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</head>
+
+  <body>
+    <header>
+      <div>
+	
+		<div id="imglogo">
+			<a href="/"><img src="/img/logo.svg" alt="朱阳星的日常" title="朱阳星的日常"/></a>
+		</div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="朱阳星的日常">朱阳星的日常</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar">
+				<a class="navbutton navmobile" href="#" title="菜单">
+				</a>
+			</div>
+			<nav class="animated">
+				<ul>
+					
+						<li>
+							<a href="/">
+								首页
+							</a>
+						</li>
+						
+						<li>
+							<a href="/archives">
+								存档
+							</a>
+						</li>
+						
+						<li>
+							<a href="/demo.html">
+								栗子
+							</a>
+						</li>
+						
+							<li>
+								
+										<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+											<label>Search</label>
+											<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+											<input type="hidden" name="q" value="site:www.zhuyangxing.cn">
+										</form>
+										
+							</li>
+				</ul>
+			</nav>
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/01/06/Building APIs with Node.js一书阅读问题汇总/" title="Building APIs with Node.js一书阅读问题汇总" itemprop="url">Building APIs with Node.js一书阅读问题汇总</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://www.zhuyangxing.cn" title="朱阳星">朱阳星</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2017-01-06T16:16:29.000Z" itemprop="datePublished">2017-01-06 16:16</time>
+    <!-- 更新日期:<time datetime="2018-04-03T07:17:03.091Z" itemprop="dateModified">2018-04-03 07:17</time>
+     -->
+  </p>
+</header>
+
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-安装sqlite3时出现卡主不动问题："><span class="toc-number">1.</span> <span class="toc-text">1. 安装sqlite3时出现卡主不动问题：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-安装bcrypt包问题-Error-bcrypt-0-8-7-install-node-gyp-rebuild"><span class="toc-number">2.</span> <span class="toc-text">2.安装bcrypt包问题 Error: bcrypt@0.8.7 install: node-gyp rebuild</span></a></li></ol>
+		</div>
+		
+		<p>该书地址：<a href="http://www.apress.com/cn/book/9781484224410" target="_blank" rel="noopener">这里</a><br>该书代码： <a href="https://github.com/caio-ribeiro-pereira/building-apis-with-nodejs" target="_blank" rel="noopener">这里</a></p>
+<h2 id="1-安装sqlite3时出现卡主不动问题："><a href="#1-安装sqlite3时出现卡主不动问题：" class="headerlink" title="1. 安装sqlite3时出现卡主不动问题："></a>1. 安装sqlite3时出现卡主不动问题：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ npm i  sqlite3 --save</span><br><span class="line">&gt; sqlite3@3.1.8 install /Users/zyx/code/lean-api/ntask-api/node_modules/sqlite3</span><br><span class="line">&gt; node-pre-gyp install --fallback-to-build</span><br></pre></td></tr></table></figure>
+<p>一直卡到这里不动，而加载其他npm包则没有问题。在查找错误原因时发现了 <a href="http://support.ghost.org/troubleshooting/#sqlite3-errors" target="_blank" rel="noopener">http://support.ghost.org/troubleshooting/#sqlite3-errors</a><br>里面有提到通过</p>
+<blockquote>
+<p>To get more information about what’s failing, run <code>npm install sqlite3 --loglevel=info</code>. You should then find a more detailed messages explaining   </p>
+</blockquote>
+<p>通过这个终于发现应该还是 GFW 的原因。<br>详细信息如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br></pre></td><td class="code"><pre><span class="line">&gt; sqlite3@3.1.8 install /Users/zyx/code/lean-api/ntask-api/node_modules/sqlite3</span><br><span class="line">&gt; node-pre-gyp install --fallback-to-build</span><br><span class="line"></span><br><span class="line">node-pre-gyp info it worked if it ends with ok</span><br><span class="line">node-pre-gyp info using node-pre-gyp@0.6.31</span><br><span class="line">node-pre-gyp info using node@7.3.0 | darwin | x64</span><br><span class="line">node-pre-gyp info check checked for &quot;/Users/zyx/code/lean-api/ntask-api/node_modules/sqlite3/lib/binding/node-v51-darwin-x64/node_sqlite3.node&quot; (not found)</span><br><span class="line">node-pre-gyp http GET https://mapbox-node-binary.s3.amazonaws.com/sqlite3/v3.1.8/node-v51-darwin-x64.tar.gz</span><br><span class="line">node-pre-gyp http 200 https://mapbox-node-binary.s3.amazonaws.com/sqlite3/v3.1.8/node-v51-darwin-x64.tar.gz</span><br><span class="line">node-pre-gyp info install unpacking node_sqlite3.node</span><br><span class="line">node-pre-gyp info tarball done parsing tarball</span><br><span class="line">node-pre-gyp info validate Running test command: &apos;/usr/local/bin/node --eval &apos;require(\&apos;/Users/zyx/code/lean-api/ntask-api/node_modules/sqlite3/lib/binding/node-v51-darwin-x64/node_sqlite3.node\&apos;)&apos;&apos;</span><br><span class="line">[sqlite3] Success: &quot;/Users/zyx/code/lean-api/ntask-api/node_modules/sqlite3/lib/binding/node-v51-darwin-x64/node_sqlite3.node&quot; is installed via remote</span><br><span class="line">node-pre-gyp info ok</span><br><span class="line">npm info lifecycle minimist@0.0.8~postinstall: minimist@0.0.8</span><br><span class="line">npm info lifecycle mkdirp@0.5.1~postinstall: mkdirp@0.5.1</span><br><span class="line">npm info lifecycle abbrev@1.0.9~postinstall: abbrev@1.0.9</span><br><span class="line">npm info lifecycle nopt@3.0.6~postinstall: nopt@3.0.6</span><br><span class="line">npm info lifecycle delegates@1.0.0~postinstall: delegates@1.0.0</span><br><span class="line">npm info lifecycle buffer-shims@1.0.0~postinstall: buffer-shims@1.0.0</span><br><span class="line">npm info lifecycle core-util-is@1.0.2~postinstall: core-util-is@1.0.2</span><br><span class="line">npm info lifecycle inherits@2.0.3~postinstall: inherits@2.0.3</span><br><span class="line">npm info lifecycle isarray@1.0.0~postinstall: isarray@1.0.0</span><br><span class="line">npm info lifecycle process-nextick-args@1.0.7~postinstall: process-nextick-args@1.0.7</span><br><span class="line">npm info lifecycle string_decoder@0.10.31~postinstall: string_decoder@0.10.31</span><br><span class="line">npm info lifecycle util-deprecate@1.0.2~postinstall: util-deprecate@1.0.2</span><br><span class="line">npm info lifecycle readable-stream@2.1.5~postinstall: readable-stream@2.1.5</span><br><span class="line">npm info lifecycle are-we-there-yet@1.1.2~postinstall: are-we-there-yet@1.1.2</span><br><span class="line">npm info lifecycle console-control-strings@1.1.0~postinstall: console-control-strings@1.1.0</span><br><span class="line">npm info lifecycle aproba@1.0.4~postinstall: aproba@1.0.4</span><br><span class="line">npm info lifecycle has-color@0.1.7~postinstall: has-color@0.1.7</span><br><span class="line">npm info lifecycle has-unicode@2.0.1~postinstall: has-unicode@2.0.1</span><br><span class="line">npm info lifecycle object-assign@4.1.0~postinstall: object-assign@4.1.0</span><br><span class="line">npm info lifecycle signal-exit@3.0.1~postinstall: signal-exit@3.0.1</span><br><span class="line">npm info lifecycle number-is-nan@1.0.1~postinstall: number-is-nan@1.0.1</span><br><span class="line">npm info lifecycle code-point-at@1.0.1~postinstall: code-point-at@1.0.1</span><br><span class="line">npm info lifecycle number-is-nan@1.0.1~postinstall: number-is-nan@1.0.1</span><br><span class="line">npm info lifecycle is-fullwidth-code-point@1.0.0~postinstall: is-fullwidth-code-point@1.0.0</span><br><span class="line">npm info lifecycle ansi-regex@2.0.0~postinstall: ansi-regex@2.0.0</span><br><span class="line">npm info lifecycle strip-ansi@3.0.1~postinstall: strip-ansi@3.0.1</span><br><span class="line">npm info lifecycle string-width@1.0.2~postinstall: string-width@1.0.2</span><br><span class="line">npm info lifecycle wide-align@1.1.0~postinstall: wide-align@1.1.0</span><br><span class="line">npm info lifecycle gauge@2.6.0~postinstall: gauge@2.6.0</span><br><span class="line">npm info lifecycle set-blocking@2.0.0~postinstall: set-blocking@2.0.0</span><br><span class="line">npm info lifecycle npmlog@4.0.0~postinstall: npmlog@4.0.0</span><br><span class="line">npm info lifecycle deep-extend@0.4.1~postinstall: deep-extend@0.4.1</span><br><span class="line">npm info lifecycle ini@1.3.4~postinstall: ini@1.3.4</span><br><span class="line">npm info lifecycle minimist@1.2.0~postinstall: minimist@1.2.0</span><br><span class="line">npm info lifecycle strip-json-comments@1.0.4~postinstall: strip-json-comments@1.0.4</span><br><span class="line">npm info lifecycle rc@1.1.6~postinstall: rc@1.1.6</span><br><span class="line">npm info lifecycle aws-sign2@0.6.0~postinstall: aws-sign2@0.6.0</span><br><span class="line">npm info lifecycle aws4@1.5.0~postinstall: aws4@1.5.0</span><br><span class="line">npm info lifecycle caseless@0.11.0~postinstall: caseless@0.11.0</span><br><span class="line">npm info lifecycle delayed-stream@1.0.0~postinstall: delayed-stream@1.0.0</span><br><span class="line">npm info lifecycle combined-stream@1.0.5~postinstall: combined-stream@1.0.5</span><br><span class="line">npm info lifecycle extend@3.0.0~postinstall: extend@3.0.0</span><br><span class="line">npm info lifecycle forever-agent@0.6.1~postinstall: forever-agent@0.6.1</span><br><span class="line">npm info lifecycle asynckit@0.4.0~postinstall: asynckit@0.4.0</span><br><span class="line">npm info lifecycle ansi-styles@2.2.1~postinstall: ansi-styles@2.2.1</span><br><span class="line">npm info lifecycle escape-string-regexp@1.0.5~postinstall: escape-string-regexp@1.0.5</span><br><span class="line">npm info lifecycle ansi-regex@2.0.0~postinstall: ansi-regex@2.0.0</span><br><span class="line">npm info lifecycle has-ansi@2.0.0~postinstall: has-ansi@2.0.0</span><br><span class="line">npm info lifecycle ansi-regex@2.0.0~postinstall: ansi-regex@2.0.0</span><br><span class="line">npm info lifecycle strip-ansi@3.0.1~postinstall: strip-ansi@3.0.1</span><br><span class="line">npm info lifecycle supports-color@2.0.0~postinstall: supports-color@2.0.0</span><br><span class="line">npm info lifecycle chalk@1.1.3~postinstall: chalk@1.1.3</span><br><span class="line">npm info lifecycle graceful-readlink@1.0.1~postinstall: graceful-readlink@1.0.1</span><br><span class="line">npm info lifecycle commander@2.9.0~postinstall: commander@2.9.0</span><br><span class="line">npm info lifecycle generate-function@2.0.0~postinstall: generate-function@2.0.0</span><br><span class="line">npm info lifecycle is-property@1.0.2~postinstall: is-property@1.0.2</span><br><span class="line">npm info lifecycle generate-object-property@1.2.0~postinstall: generate-object-property@1.2.0</span><br><span class="line">npm info lifecycle jsonpointer@4.0.0~postinstall: jsonpointer@4.0.0</span><br><span class="line">npm info lifecycle xtend@4.0.1~postinstall: xtend@4.0.1</span><br><span class="line">npm info lifecycle is-my-json-valid@2.15.0~postinstall: is-my-json-valid@2.15.0</span><br><span class="line">npm info lifecycle pinkie@2.0.4~postinstall: pinkie@2.0.4</span><br><span class="line">npm info lifecycle pinkie-promise@2.0.1~postinstall: pinkie-promise@2.0.1</span><br><span class="line">npm info lifecycle har-validator@2.0.6~postinstall: har-validator@2.0.6</span><br><span class="line">npm info lifecycle hoek@2.16.3~postinstall: hoek@2.16.3</span><br><span class="line">npm info lifecycle boom@2.10.1~postinstall: boom@2.10.1</span><br><span class="line">npm info lifecycle cryptiles@2.0.5~postinstall: cryptiles@2.0.5</span><br><span class="line">npm info lifecycle sntp@1.0.9~postinstall: sntp@1.0.9</span><br><span class="line">npm info lifecycle hawk@3.1.3~postinstall: hawk@3.1.3</span><br><span class="line">npm info lifecycle assert-plus@0.2.0~postinstall: assert-plus@0.2.0</span><br><span class="line">npm info lifecycle extsprintf@1.0.2~postinstall: extsprintf@1.0.2</span><br><span class="line">npm info lifecycle json-schema@0.2.3~postinstall: json-schema@0.2.3</span><br><span class="line">npm info lifecycle verror@1.3.6~postinstall: verror@1.3.6</span><br><span class="line">npm info lifecycle jsprim@1.3.1~postinstall: jsprim@1.3.1</span><br><span class="line">npm info lifecycle asn1@0.2.3~postinstall: asn1@0.2.3</span><br><span class="line">npm info lifecycle assert-plus@1.0.0~postinstall: assert-plus@1.0.0</span><br><span class="line">npm info lifecycle dashdash@1.14.0~postinstall: dashdash@1.14.0</span><br><span class="line">npm info lifecycle getpass@0.1.6~postinstall: getpass@0.1.6</span><br><span class="line">npm info lifecycle jsbn@0.1.0~postinstall: jsbn@0.1.0</span><br><span class="line">npm info lifecycle ecc-jsbn@0.1.1~postinstall: ecc-jsbn@0.1.1</span><br><span class="line">npm info lifecycle jodid25519@1.0.2~postinstall: jodid25519@1.0.2</span><br><span class="line">npm info lifecycle tweetnacl@0.14.3~postinstall: tweetnacl@0.14.3</span><br><span class="line">npm info lifecycle bcrypt-pbkdf@1.0.0~postinstall: bcrypt-pbkdf@1.0.0</span><br><span class="line">npm info lifecycle sshpk@1.10.1~postinstall: sshpk@1.10.1</span><br><span class="line">npm info lifecycle http-signature@1.1.1~postinstall: http-signature@1.1.1</span><br><span class="line">npm info lifecycle is-typedarray@1.0.0~postinstall: is-typedarray@1.0.0</span><br><span class="line">npm info lifecycle isstream@0.1.2~postinstall: isstream@0.1.2</span><br><span class="line">npm info lifecycle json-stringify-safe@5.0.1~postinstall: json-stringify-safe@5.0.1</span><br><span class="line">npm info lifecycle mime-db@1.24.0~postinstall: mime-db@1.24.0</span><br><span class="line">npm info lifecycle mime-types@2.1.12~postinstall: mime-types@2.1.12</span><br><span class="line">npm info lifecycle form-data@2.1.1~postinstall: form-data@2.1.1</span><br><span class="line">npm info lifecycle node-uuid@1.4.7~postinstall: node-uuid@1.4.7</span><br><span class="line">npm info lifecycle oauth-sign@0.8.2~postinstall: oauth-sign@0.8.2</span><br><span class="line">npm info lifecycle qs@6.3.0~postinstall: qs@6.3.0</span><br><span class="line">npm info lifecycle stringstream@0.0.5~postinstall: stringstream@0.0.5</span><br><span class="line">npm info lifecycle punycode@1.4.1~postinstall: punycode@1.4.1</span><br><span class="line">npm info lifecycle tough-cookie@2.3.2~postinstall: tough-cookie@2.3.2</span><br><span class="line">npm info lifecycle tunnel-agent@0.4.3~postinstall: tunnel-agent@0.4.3</span><br><span class="line">npm info lifecycle request@2.76.0~postinstall: request@2.76.0</span><br><span class="line">npm info lifecycle fs.realpath@1.0.0~postinstall: fs.realpath@1.0.0</span><br><span class="line">npm info lifecycle wrappy@1.0.2~postinstall: wrappy@1.0.2</span><br><span class="line">npm info lifecycle inherits@2.0.3~postinstall: inherits@2.0.3</span><br><span class="line">npm info lifecycle balanced-match@0.4.2~postinstall: balanced-match@0.4.2</span><br><span class="line">npm info lifecycle concat-map@0.0.1~postinstall: concat-map@0.0.1</span><br><span class="line">npm info lifecycle brace-expansion@1.1.6~postinstall: brace-expansion@1.1.6</span><br><span class="line">npm info lifecycle minimatch@3.0.3~postinstall: minimatch@3.0.3</span><br><span class="line">npm info lifecycle wrappy@1.0.2~postinstall: wrappy@1.0.2</span><br><span class="line">npm info lifecycle once@1.4.0~postinstall: once@1.4.0</span><br><span class="line">npm info lifecycle inflight@1.0.6~postinstall: inflight@1.0.6</span><br><span class="line">npm info lifecycle path-is-absolute@1.0.1~postinstall: path-is-absolute@1.0.1</span><br><span class="line">npm info lifecycle glob@7.1.1~postinstall: glob@7.1.1</span><br><span class="line">npm info lifecycle rimraf@2.5.4~postinstall: rimraf@2.5.4</span><br><span class="line">npm info lifecycle semver@5.3.0~postinstall: semver@5.3.0</span><br><span class="line">npm info lifecycle ms@0.7.1~postinstall: ms@0.7.1</span><br><span class="line">npm info lifecycle debug@2.2.0~postinstall: debug@2.2.0</span><br><span class="line">npm info lifecycle inherits@2.0.3~postinstall: inherits@2.0.3</span><br><span class="line">npm info lifecycle balanced-match@0.4.2~postinstall: balanced-match@0.4.2</span><br><span class="line">npm info lifecycle concat-map@0.0.1~postinstall: concat-map@0.0.1</span><br><span class="line">npm info lifecycle brace-expansion@1.1.6~postinstall: brace-expansion@1.1.6</span><br><span class="line">npm info lifecycle minimatch@3.0.3~postinstall: minimatch@3.0.3</span><br><span class="line">npm info lifecycle graceful-fs@4.1.9~postinstall: graceful-fs@4.1.9</span><br><span class="line">npm info lifecycle inherits@2.0.3~postinstall: inherits@2.0.3</span><br><span class="line">npm info lifecycle fstream@1.0.10~postinstall: fstream@1.0.10</span><br><span class="line">npm info lifecycle fstream-ignore@1.0.5~postinstall: fstream-ignore@1.0.5</span><br><span class="line">npm info lifecycle wrappy@1.0.2~postinstall: wrappy@1.0.2</span><br><span class="line">npm info lifecycle once@1.3.3~postinstall: once@1.3.3</span><br><span class="line">npm info lifecycle buffer-shims@1.0.0~postinstall: buffer-shims@1.0.0</span><br><span class="line">npm info lifecycle core-util-is@1.0.2~postinstall: core-util-is@1.0.2</span><br><span class="line">npm info lifecycle inherits@2.0.3~postinstall: inherits@2.0.3</span><br><span class="line">npm info lifecycle isarray@1.0.0~postinstall: isarray@1.0.0</span><br><span class="line">npm info lifecycle process-nextick-args@1.0.7~postinstall: process-nextick-args@1.0.7</span><br><span class="line">npm info lifecycle string_decoder@0.10.31~postinstall: string_decoder@0.10.31</span><br><span class="line">npm info lifecycle util-deprecate@1.0.2~postinstall: util-deprecate@1.0.2</span><br><span class="line">npm info lifecycle readable-stream@2.1.5~postinstall: readable-stream@2.1.5</span><br><span class="line">npm info lifecycle uid-number@0.0.6~postinstall: uid-number@0.0.6</span><br><span class="line">npm info lifecycle graceful-fs@4.1.9~postinstall: graceful-fs@4.1.9</span><br><span class="line">npm info lifecycle inherits@2.0.3~postinstall: inherits@2.0.3</span><br><span class="line">npm info lifecycle block-stream@0.0.9~postinstall: block-stream@0.0.9</span><br><span class="line">npm info lifecycle fstream@1.0.10~postinstall: fstream@1.0.10</span><br><span class="line">npm info lifecycle tar@2.2.1~postinstall: tar@2.2.1</span><br><span class="line">npm info lifecycle tar-pack@3.3.0~postinstall: tar-pack@3.3.0</span><br><span class="line">npm info lifecycle nan@2.4.0~postinstall: nan@2.4.0</span><br><span class="line">npm info lifecycle node-pre-gyp@0.6.31~postinstall: node-pre-gyp@0.6.31</span><br><span class="line">npm info lifecycle sqlite3@3.1.8~postinstall: sqlite3@3.1.8</span><br><span class="line">ntask-api@1.0.0 /Users/zyx/code/lean-api/ntask-api</span><br><span class="line">└─┬ sqlite3@3.1.8</span><br><span class="line">  ├── nan@2.4.0</span><br><span class="line">  └─┬ node-pre-gyp@0.6.31</span><br><span class="line">    ├─┬ mkdirp@0.5.1</span><br><span class="line">    │ └── minimist@0.0.8</span><br><span class="line">    ├─┬ nopt@3.0.6</span><br><span class="line">    │ └── abbrev@1.0.9</span><br><span class="line">    ├─┬ npmlog@4.0.0</span><br><span class="line">    │ ├─┬ are-we-there-yet@1.1.2</span><br><span class="line">    │ │ ├── delegates@1.0.0</span><br><span class="line">    │ │ └─┬ readable-stream@2.1.5</span><br><span class="line">    │ │   ├── buffer-shims@1.0.0</span><br><span class="line">    │ │   ├── core-util-is@1.0.2</span><br><span class="line">    │ │   ├── inherits@2.0.3</span><br><span class="line">    │ │   ├── isarray@1.0.0</span><br><span class="line">    │ │   ├── process-nextick-args@1.0.7</span><br><span class="line">    │ │   ├── string_decoder@0.10.31</span><br><span class="line">    │ │   └── util-deprecate@1.0.2</span><br><span class="line">    │ ├── console-control-strings@1.1.0</span><br><span class="line">    │ ├─┬ gauge@2.6.0</span><br><span class="line">    │ │ ├── aproba@1.0.4</span><br><span class="line">    │ │ ├── has-color@0.1.7</span><br><span class="line">    │ │ ├── has-unicode@2.0.1</span><br><span class="line">    │ │ ├── object-assign@4.1.0</span><br><span class="line">    │ │ ├── signal-exit@3.0.1</span><br><span class="line">    │ │ ├─┬ string-width@1.0.2</span><br><span class="line">    │ │ │ ├─┬ code-point-at@1.0.1</span><br><span class="line">    │ │ │ │ └── number-is-nan@1.0.1</span><br><span class="line">    │ │ │ └─┬ is-fullwidth-code-point@1.0.0</span><br><span class="line">    │ │ │   └── number-is-nan@1.0.1</span><br><span class="line">    │ │ ├─┬ strip-ansi@3.0.1</span><br><span class="line">    │ │ │ └── ansi-regex@2.0.0</span><br><span class="line">    │ │ └── wide-align@1.1.0</span><br><span class="line">    │ └── set-blocking@2.0.0</span><br><span class="line">    ├─┬ rc@1.1.6</span><br><span class="line">    │ ├── deep-extend@0.4.1</span><br><span class="line">    │ ├── ini@1.3.4</span><br><span class="line">    │ ├── minimist@1.2.0</span><br><span class="line">    │ └── strip-json-comments@1.0.4</span><br><span class="line">    ├─┬ request@2.76.0</span><br><span class="line">    │ ├── aws-sign2@0.6.0</span><br><span class="line">    │ ├── aws4@1.5.0</span><br><span class="line">    │ ├── caseless@0.11.0</span><br><span class="line">    │ ├─┬ combined-stream@1.0.5</span><br><span class="line">    │ │ └── delayed-stream@1.0.0</span><br><span class="line">    │ ├── extend@3.0.0</span><br><span class="line">    │ ├── forever-agent@0.6.1</span><br><span class="line">    │ ├─┬ form-data@2.1.1</span><br><span class="line">    │ │ └── asynckit@0.4.0</span><br><span class="line">    │ ├─┬ har-validator@2.0.6</span><br><span class="line">    │ │ ├─┬ chalk@1.1.3</span><br><span class="line">    │ │ │ ├── ansi-styles@2.2.1</span><br><span class="line">    │ │ │ ├── escape-string-regexp@1.0.5</span><br><span class="line">    │ │ │ ├─┬ has-ansi@2.0.0</span><br><span class="line">    │ │ │ │ └── ansi-regex@2.0.0</span><br><span class="line">    │ │ │ ├─┬ strip-ansi@3.0.1</span><br><span class="line">    │ │ │ │ └── ansi-regex@2.0.0</span><br><span class="line">    │ │ │ └── supports-color@2.0.0</span><br><span class="line">    │ │ ├─┬ commander@2.9.0</span><br><span class="line">    │ │ │ └── graceful-readlink@1.0.1</span><br><span class="line">    │ │ ├─┬ is-my-json-valid@2.15.0</span><br><span class="line">    │ │ │ ├── generate-function@2.0.0</span><br><span class="line">    │ │ │ ├─┬ generate-object-property@1.2.0</span><br><span class="line">    │ │ │ │ └── is-property@1.0.2</span><br><span class="line">    │ │ │ ├── jsonpointer@4.0.0</span><br><span class="line">    │ │ │ └── xtend@4.0.1</span><br><span class="line">    │ │ └─┬ pinkie-promise@2.0.1</span><br><span class="line">    │ │   └── pinkie@2.0.4</span><br><span class="line">    │ ├─┬ hawk@3.1.3</span><br><span class="line">    │ │ ├── boom@2.10.1</span><br><span class="line">    │ │ ├── cryptiles@2.0.5</span><br><span class="line">    │ │ ├── hoek@2.16.3</span><br><span class="line">    │ │ └── sntp@1.0.9</span><br><span class="line">    │ ├─┬ http-signature@1.1.1</span><br><span class="line">    │ │ ├── assert-plus@0.2.0</span><br><span class="line">    │ │ ├─┬ jsprim@1.3.1</span><br><span class="line">    │ │ │ ├── extsprintf@1.0.2</span><br><span class="line">    │ │ │ ├── json-schema@0.2.3</span><br><span class="line">    │ │ │ └── verror@1.3.6</span><br><span class="line">    │ │ └─┬ sshpk@1.10.1</span><br><span class="line">    │ │   ├── asn1@0.2.3</span><br><span class="line">    │ │   ├── assert-plus@1.0.0</span><br><span class="line">    │ │   ├── bcrypt-pbkdf@1.0.0</span><br><span class="line">    │ │   ├── dashdash@1.14.0</span><br><span class="line">    │ │   ├── ecc-jsbn@0.1.1</span><br><span class="line">    │ │   ├── getpass@0.1.6</span><br><span class="line">    │ │   ├── jodid25519@1.0.2</span><br><span class="line">    │ │   ├── jsbn@0.1.0</span><br><span class="line">    │ │   └── tweetnacl@0.14.3</span><br><span class="line">    │ ├── is-typedarray@1.0.0</span><br><span class="line">    │ ├── isstream@0.1.2</span><br><span class="line">    │ ├── json-stringify-safe@5.0.1</span><br><span class="line">    │ ├─┬ mime-types@2.1.12</span><br><span class="line">    │ │ └── mime-db@1.24.0</span><br><span class="line">    │ ├── node-uuid@1.4.7</span><br><span class="line">    │ ├── oauth-sign@0.8.2</span><br><span class="line">    │ ├── qs@6.3.0</span><br><span class="line">    │ ├── stringstream@0.0.5</span><br><span class="line">    │ ├─┬ tough-cookie@2.3.2</span><br><span class="line">    │ │ └── punycode@1.4.1</span><br><span class="line">    │ └── tunnel-agent@0.4.3</span><br><span class="line">    ├─┬ rimraf@2.5.4</span><br><span class="line">    │ └─┬ glob@7.1.1</span><br><span class="line">    │   ├── fs.realpath@1.0.0</span><br><span class="line">    │   ├─┬ inflight@1.0.6</span><br><span class="line">    │   │ └── wrappy@1.0.2</span><br><span class="line">    │   ├── inherits@2.0.3</span><br><span class="line">    │   ├─┬ minimatch@3.0.3</span><br><span class="line">    │   │ └─┬ brace-expansion@1.1.6</span><br><span class="line">    │   │   ├── balanced-match@0.4.2</span><br><span class="line">    │   │   └── concat-map@0.0.1</span><br><span class="line">    │   ├─┬ once@1.4.0</span><br><span class="line">    │   │ └── wrappy@1.0.2</span><br><span class="line">    │   └── path-is-absolute@1.0.1</span><br><span class="line">    ├── semver@5.3.0</span><br><span class="line">    ├─┬ tar@2.2.1</span><br><span class="line">    │ ├── block-stream@0.0.9</span><br><span class="line">    │ ├─┬ fstream@1.0.10</span><br><span class="line">    │ │ └── graceful-fs@4.1.9</span><br><span class="line">    │ └── inherits@2.0.3</span><br><span class="line">    └─┬ tar-pack@3.3.0</span><br><span class="line">      ├─┬ debug@2.2.0</span><br><span class="line">      │ └── ms@0.7.1</span><br><span class="line">      ├─┬ fstream@1.0.10</span><br><span class="line">      │ ├── graceful-fs@4.1.9</span><br><span class="line">      │ └── inherits@2.0.3</span><br><span class="line">      ├─┬ fstream-ignore@1.0.5</span><br><span class="line">      │ ├── inherits@2.0.3</span><br><span class="line">      │ └─┬ minimatch@3.0.3</span><br><span class="line">      │   └─┬ brace-expansion@1.1.6</span><br><span class="line">      │     ├── balanced-match@0.4.2</span><br><span class="line">      │     └── concat-map@0.0.1</span><br><span class="line">      ├─┬ once@1.3.3</span><br><span class="line">      │ └── wrappy@1.0.2</span><br><span class="line">      ├─┬ readable-stream@2.1.5</span><br><span class="line">      │ ├── buffer-shims@1.0.0</span><br><span class="line">      │ ├── core-util-is@1.0.2</span><br><span class="line">      │ ├── inherits@2.0.3</span><br><span class="line">      │ ├── isarray@1.0.0</span><br><span class="line">      │ ├── process-nextick-args@1.0.7</span><br><span class="line">      │ ├── string_decoder@0.10.31</span><br><span class="line">      │ └── util-deprecate@1.0.2</span><br><span class="line">      └── uid-number@0.0.6</span><br><span class="line"></span><br><span class="line">npm WARN ntask-api@1.0.0 No description</span><br><span class="line">npm WARN ntask-api@1.0.0 No repository field.</span><br><span class="line">npm info ok</span><br></pre></td></tr></table></figure></p>
+<h2 id="2-安装bcrypt包问题-Error-bcrypt-0-8-7-install-node-gyp-rebuild"><a href="#2-安装bcrypt包问题-Error-bcrypt-0-8-7-install-node-gyp-rebuild" class="headerlink" title="2.安装bcrypt包问题 Error: bcrypt@0.8.7 install: node-gyp rebuild"></a>2.安装bcrypt包问题 Error: <a href="mailto:bcrypt@0.8.7" target="_blank" rel="noopener">bcrypt@0.8.7</a> install: <code>node-gyp rebuild</code></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Agreeing to the Xcode/iOS license requires admin privileges, please re-run as root via sudo.</span><br><span class="line">Agreeing to the Xcode/iOS license requires admin privileges, please re-run as root via sudo.</span><br></pre></td></tr></table></figure>
+<p>解决方法如下：</p>
+<blockquote>
+<p>this generally occurs after the mac OS update. All you need to do in terminal is run <code>sudo xcodebuild -license</code> and then agree to the terms. and then <code>npm install</code> is ok</p>
+</blockquote>
+<p><a href="http://stackoverflow.com/questions/32720476/agreeing-to-the-xcode-ios-license-requires-admin-privileges-please-re-run-as-ro" target="_blank" rel="noopener">key about the solution</a></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <!--<div data-url="http://www.zhuyangxing.cn/2017/01/06/Building APIs with Node.js一书阅读问题汇总/" data-title="Building APIs with Node.js一书阅读问题汇总 | 朱阳星的日常" data-tsina="null" class="share clearfix">
+  </div>-->
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2017/01/17/Building APIs with Node.js一书阅读笔记/" title="Building APIs with Node.js一书阅读笔记">
+  <strong>上一篇:</strong><br/>
+  <span>
+  Building APIs with Node.js一书阅读笔记</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/11/19/工作中遇到的部分问题/"  title="工作中遇到的部分问题">
+ <strong>下一篇:</strong><br/> 
+ <span>工作中遇到的部分问题
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-安装sqlite3时出现卡主不动问题："><span class="toc-number">1.</span> <span class="toc-text">1. 安装sqlite3时出现卡主不动问题：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-安装bcrypt包问题-Error-bcrypt-0-8-7-install-node-gyp-rebuild"><span class="toc-number">2.</span> <span class="toc-text">2.安装bcrypt包问题 Error: bcrypt@0.8.7 install: node-gyp rebuild</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/css/" title="css">css<sup>1</sup></a></li>
+		
+			<li><a href="/tags/hexo/" title="hexo">hexo<sup>2</sup></a></li>
+		
+			<li><a href="/tags/vue/" title="vue">vue<sup>1</sup></a></li>
+		
+			<li><a href="/tags/前端/" title="前端">前端<sup>15</sup></a></li>
+		
+			<li><a href="/tags/工具/" title="工具">工具<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/archives">归档</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">4</span></li></ul>
+  </div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+      <li><a href="http://www.zhangxinxu.com" target="_blank" title="张鑫旭">张鑫旭</a></li>
+      <li><a href="http://hexo.io" target="_blank" title="Hexo">Hexo</a></li>
+    </ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer">
+			<div class="bottom">
+				<div class="word">
+					Copyright 2015 zhuyangxing.cn AllRights Reserved.
+				</div>
+			</div>
+		<script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=10861255704412712674' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>

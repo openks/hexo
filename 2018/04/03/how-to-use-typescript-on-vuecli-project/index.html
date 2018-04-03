@@ -1,0 +1,346 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>如何在vuecli项目里使用typescript | 朱阳星的日常</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="朱阳星">
+    
+    <meta name="description" itemprop="description" content="教你如何在vuecli项目里使用typescript">
+    
+    <meta name="keywords" content="Vue,vuecli,typescript">
+    
+    
+    <link rel="alternate" href="/atom.xml" title="朱阳星的日常" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+<script type="text/javascript">
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?a0056a3043f21f699150e6a4b66104ef";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</head>
+
+  <body>
+    <header>
+      <div>
+	
+		<div id="imglogo">
+			<a href="/"><img src="/img/logo.svg" alt="朱阳星的日常" title="朱阳星的日常"/></a>
+		</div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="朱阳星的日常">朱阳星的日常</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar">
+				<a class="navbutton navmobile" href="#" title="菜单">
+				</a>
+			</div>
+			<nav class="animated">
+				<ul>
+					
+						<li>
+							<a href="/">
+								首页
+							</a>
+						</li>
+						
+						<li>
+							<a href="/archives">
+								存档
+							</a>
+						</li>
+						
+						<li>
+							<a href="/demo.html">
+								栗子
+							</a>
+						</li>
+						
+							<li>
+								
+										<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+											<label>Search</label>
+											<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+											<input type="hidden" name="q" value="site:www.zhuyangxing.cn">
+										</form>
+										
+							</li>
+				</ul>
+			</nav>
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/04/03/how-to-use-typescript-on-vuecli-project/" title="如何在vuecli项目里使用typescript" itemprop="url">如何在vuecli项目里使用typescript</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://www.zhuyangxing.cn" title="朱阳星">朱阳星</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2018-04-03T07:17:03.091Z" itemprop="datePublished">2018-04-03 07:17</time>
+    <!-- 更新日期:<time datetime="2018-04-03T07:17:03.091Z" itemprop="dateModified">2018-04-03 07:17</time>
+     -->
+  </p>
+</header>
+
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#如何在vuecli项目里使用typescript"><span class="toc-number">1.</span> <span class="toc-text">如何在vuecli项目里使用typescript</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#第一阶段"><span class="toc-number">1.1.</span> <span class="toc-text">第一阶段</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第二阶段"><span class="toc-number">2.</span> <span class="toc-text">第二阶段</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li></ol>
+		</div>
+		
+		<h1 id="如何在vuecli项目里使用typescript"><a href="#如何在vuecli项目里使用typescript" class="headerlink" title="如何在vuecli项目里使用typescript"></a>如何在vuecli项目里使用typescript</h1><h2 id="第一阶段"><a href="#第一阶段" class="headerlink" title="第一阶段"></a>第一阶段</h2><p>先安装<code>typescript</code>,<code>ts-loader</code><br><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add typescript ts-loader</span><br></pre></td></tr></table></figure></p>
+<p>1.修改<code>webpack</code>配置文件<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// build/webpack.base.conf.js</span></span><br><span class="line">entry: &#123;</span><br><span class="line">  app: <span class="string">'./src/main.ts'</span><span class="comment">// 修改为ts文件格式(务必留意修改配置文件格式需重启)</span></span><br><span class="line">&#125;,</span><br><span class="line">extensions: [<span class="string">'.js'</span>, <span class="string">'.vue'</span>, <span class="string">'.json'</span>, <span class="string">'.ts'</span>, <span class="string">'.tsx'</span>]<span class="comment">//添加ts,tsx文件格式</span></span><br><span class="line"><span class="comment">//新增loader配置</span></span><br><span class="line">&#123;</span><br><span class="line">    test: <span class="regexp">/\.tsx?$/</span>,</span><br><span class="line">    loader: <span class="string">'ts-loader'</span>,</span><br><span class="line">    exclude: <span class="regexp">/node_modules/</span>,</span><br><span class="line">    options: &#123;</span><br><span class="line">      appendTsSuffixTo: [<span class="regexp">/\.vue$/</span>],</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>2.新增配置文件<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">// 根目录下 tsconfig.json</span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">"include"</span>: [</span><br><span class="line">    <span class="string">"src/**/*"</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"exclude"</span>: [</span><br><span class="line">    <span class="string">"node_modules"</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"compilerOptions"</span>: &#123;</span><br><span class="line">    <span class="attr">"allowSyntheticDefaultImports"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"experimentalDecorators"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"allowJs"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"module"</span>: <span class="string">"es2015"</span>,</span><br><span class="line">    <span class="attr">"target"</span>: <span class="string">"es5"</span>,</span><br><span class="line">    <span class="attr">"moduleResolution"</span>: <span class="string">"node"</span>,</span><br><span class="line">    <span class="attr">"experimentalDecorators"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"isolatedModules"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"lib"</span>: [</span><br><span class="line">      <span class="string">"dom"</span>,</span><br><span class="line">      <span class="string">"es5"</span>,</span><br><span class="line">      <span class="string">"es2015.promise"</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">"sourceMap"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"pretty"</span>: <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>3.新增.t.ds配置文件<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 新增 src/vue-shims.d.ts文件</span></span><br><span class="line">declare <span class="built_in">module</span> <span class="string">"*.vue"</span> &#123;</span><br><span class="line">  <span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span>;</span><br><span class="line">  <span class="keyword">export</span> <span class="keyword">default</span> Vue;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
+<p>4.修改<code>main.js</code>为<code>main.ts</code><br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//main.ts</span></span><br><span class="line"><span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">'./App.vue'</span>;<span class="comment">//添加vue后缀不然会报出无法识别的错误</span></span><br></pre></td></tr></table></figure></p>
+<p>经过以上四步设置后就可以直接在项目里使用<code>&lt;script lang=&#39;ts&#39;&gt;</code>标签写<code>typescript</code>了<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">lang</span>=<span class="string">'ts'</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line"><span class="javascript">  name: <span class="string">'hello'</span>,</span></span><br><span class="line"><span class="undefined">  data() &#123;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">return</span> &#123;</span></span><br><span class="line"><span class="javascript">      msg: <span class="string">'Welcome to Your Vue.js App'</span>,</span></span><br><span class="line"><span class="undefined">    &#125;;</span></span><br><span class="line"><span class="undefined">  &#125;,</span></span><br><span class="line"><span class="undefined">  computed: &#123;</span></span><br><span class="line"><span class="undefined">    computedMsg(): string &#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">return</span> <span class="string">`computed<span class="subst">$&#123;<span class="keyword">this</span>.msg&#125;</span>`</span>;</span></span><br><span class="line"><span class="undefined">    &#125;,</span></span><br><span class="line"><span class="undefined">  &#125;,</span></span><br><span class="line"><span class="undefined">  methods: &#123;</span></span><br><span class="line"><span class="undefined">    hello(): string &#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">return</span> <span class="string">`hello<span class="subst">$&#123;<span class="keyword">this</span>.msg&#125;</span>`</span>;</span></span><br><span class="line"><span class="undefined">    &#125;,</span></span><br><span class="line"><span class="undefined">  &#125;,</span></span><br><span class="line"><span class="undefined">&#125;;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="第二阶段"><a href="#第二阶段" class="headerlink" title="第二阶段"></a>第二阶段</h1><p>使用官方推荐的(vue-class-component)[<a href="https://github.com/vuejs/vue-class-component]" target="_blank" rel="noopener">https://github.com/vuejs/vue-class-component]</a><br>安装插件<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add  babel-plugin-transform-decorators-legacy vue-<span class="class"><span class="keyword">class</span>-<span class="title">component</span></span></span><br></pre></td></tr></table></figure></p>
+<p>修改<code>babel</code>配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//.babelrc </span><br><span class="line">  &quot;plugins&quot;: [&quot;transform-runtime&quot;,&quot;babel-plugin-transform-class-properties&quot;],// 添加插件</span><br></pre></td></tr></table></figure></p>
+<p>之后就可以使用类的方式写<code>ts</code>了<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">lang</span>=<span class="string">'ts'</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span>;</span></span><br><span class="line"><span class="javascript"><span class="keyword">import</span> Component <span class="keyword">from</span> <span class="string">'vue-class-component'</span>;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">@Component</span></span><br><span class="line"><span class="javascript"><span class="class"><span class="keyword">class</span> <span class="title">Hello</span> <span class="keyword">extends</span> <span class="title">Vue</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">  <span class="comment">// initial data</span></span></span><br><span class="line"><span class="javascript">  name:string = <span class="string">'hello'</span>;</span></span><br><span class="line"><span class="javascript">  msga:string = <span class="string">'sssd'</span>;</span></span><br><span class="line"><span class="javascript">  msg:string = <span class="string">'msg'</span>;</span></span><br><span class="line"><span class="javascript">  <span class="comment">// lifecycle hook</span></span></span><br><span class="line"><span class="undefined">  mounted() &#123;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">this</span>.greet();</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="javascript">  <span class="comment">// computed</span></span></span><br><span class="line"><span class="undefined">  get computedMsg() &#123;</span></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(<span class="string">`computed <span class="subst">$&#123;<span class="keyword">this</span>.msg&#125;</span>`</span>);</span></span><br><span class="line"><span class="javascript">    <span class="keyword">return</span> <span class="string">`computed <span class="subst">$&#123;<span class="keyword">this</span>.msg&#125;</span>`</span>;</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="javascript">  <span class="comment">// method</span></span></span><br><span class="line"><span class="undefined">  greet() &#123;</span></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(<span class="string">`greeting: <span class="subst">$&#123;<span class="keyword">this</span>.msg&#125;</span>`</span>);</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="undefined">  hello() &#123;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">return</span> <span class="keyword">this</span>.msg;</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="undefined">&#125;</span></span><br><span class="line"><span class="javascript"><span class="keyword">export</span> <span class="keyword">default</span> Hello;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>如果需要<code>watch</code>则需要添加(<code>vue-property-decorator</code>)[<a href="https://github.com/kaorun343/vue-property-decorator]具体使用方法" target="_blank" rel="noopener">https://github.com/kaorun343/vue-property-decorator]具体使用方法</a> 请参照文档<br><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add vue-property-decorator</span><br></pre></td></tr></table></figure></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>我在尝试过程中发现两个坑爹问题<br>1.项目起动起来后chrome浏览器无法访问 （纸飞机）<br>2.第二阶段所有设置好后发现页面报错 （不认真）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[Vue warn]: Property or method &quot;msg&quot; is not defined on the instance but referenced during render. Make sure to declare reactive data properties in the data option.</span><br><span class="line"></span><br><span class="line">found in</span><br><span class="line"></span><br><span class="line">---&gt; &lt;Hello&gt; at src/components/Hello.vue</span><br><span class="line">       &lt;App&gt; at src/App.vue</span><br><span class="line">         &lt;Root&gt;</span><br></pre></td></tr></table></figure></p>
+<p>对于问题1:<br>发现竟然跟<strong><em>纸飞机</em></strong>有关。。纸飞机 。。之前一直都是好的，在chrome自动升级后就不行了无法打开，<br>在我用mac访问局域网无法访问的时候才发觉跟网络有关把纸飞机一关，局域网和项目竟然都能正常了</p>
+<p>对于问题2:<br>一直找不到原因，明明都对啊，为什么显示不正常,看提示信息很明显没有声明就在template里使用.<br>我的代码如下<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span>;</span></span><br><span class="line"><span class="javascript"><span class="keyword">import</span> Component <span class="keyword">from</span> <span class="string">'vue-class-component'</span>;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">@Component</span></span><br><span class="line"><span class="javascript"><span class="class"><span class="keyword">class</span> <span class="title">Hello</span> <span class="keyword">extends</span> <span class="title">Vue</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">  <span class="comment">// initial data</span></span></span><br><span class="line"><span class="javascript">  name: <span class="string">'hello'</span>;</span></span><br><span class="line"><span class="javascript">  msga: <span class="string">'sssd'</span>;</span></span><br><span class="line"><span class="javascript">  msg: <span class="string">'msg'</span>;</span></span><br><span class="line"><span class="javascript">  <span class="comment">// lifecycle hook</span></span></span><br><span class="line"><span class="undefined">  mounted() &#123;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">this</span>.greet();</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="javascript">  <span class="comment">// computed</span></span></span><br><span class="line"><span class="undefined">  get computedMsg() &#123;</span></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(<span class="string">`computed <span class="subst">$&#123;<span class="keyword">this</span>.msg&#125;</span>`</span>);</span></span><br><span class="line"><span class="javascript">    <span class="keyword">return</span> <span class="string">`computed <span class="subst">$&#123;<span class="keyword">this</span>.msg&#125;</span>`</span>;</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="javascript">  <span class="comment">// method</span></span></span><br><span class="line"><span class="undefined">  greet() &#123;</span></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(<span class="string">`greeting: <span class="subst">$&#123;<span class="keyword">this</span>.msg&#125;</span>`</span>);</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="undefined">  hello() &#123;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">return</span> <span class="keyword">this</span>.msg;</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="undefined">&#125;</span></span><br><span class="line"><span class="javascript"><span class="keyword">export</span> <span class="keyword">default</span> Hello;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>甚至我都把<code>ts</code>都去了只用<code>vue-class-component</code>对比了N久搞到要回家了硬是没找到答案。。。<br>回家还在纳闷为毛不正常，为什么第二天一早很容易就发现问题了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">msg: &apos;msg&apos;;//不是用冒号 应该用等号。。 这么简单昨天竟然一直没看出来</span><br><span class="line">msg= &apos;msg&apos;;</span><br></pre></td></tr></table></figure></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/vue/">vue</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/前端/">前端</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <!--<div data-url="http://www.zhuyangxing.cn/2018/04/03/how-to-use-typescript-on-vuecli-project/" data-title="如何在vuecli项目里使用typescript | 朱阳星的日常" data-tsina="null" class="share clearfix">
+  </div>-->
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2018/04/03/读airbnb标准有感/"  title="读airbnb标准有感">
+ <strong>下一篇:</strong><br/> 
+ <span>读airbnb标准有感
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#如何在vuecli项目里使用typescript"><span class="toc-number">1.</span> <span class="toc-text">如何在vuecli项目里使用typescript</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#第一阶段"><span class="toc-number">1.1.</span> <span class="toc-text">第一阶段</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第二阶段"><span class="toc-number">2.</span> <span class="toc-text">第二阶段</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/css/" title="css">css<sup>1</sup></a></li>
+		
+			<li><a href="/tags/hexo/" title="hexo">hexo<sup>2</sup></a></li>
+		
+			<li><a href="/tags/vue/" title="vue">vue<sup>1</sup></a></li>
+		
+			<li><a href="/tags/前端/" title="前端">前端<sup>15</sup></a></li>
+		
+			<li><a href="/tags/工具/" title="工具">工具<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/archives">归档</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">4</span></li></ul>
+  </div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+      <li><a href="http://www.zhangxinxu.com" target="_blank" title="张鑫旭">张鑫旭</a></li>
+      <li><a href="http://hexo.io" target="_blank" title="Hexo">Hexo</a></li>
+    </ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer">
+			<div class="bottom">
+				<div class="word">
+					Copyright 2015 zhuyangxing.cn AllRights Reserved.
+				</div>
+			</div>
+		<script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=10861255704412712674' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
