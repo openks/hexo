@@ -1,3 +1,10 @@
+---
+title: 项目使用stylelint
+date: 2017-11-02 15:44:15  
+description:  项目使用stylelint
+---
+
+
 eslint可以很简单的让团队js代码风格一致,而css也有一款这样的工具只是还没有那么多人知道罢了  
 他就是stylelint,它其实是参考eslint风格做的，也是需要安装stylelint和配置规则
 ```

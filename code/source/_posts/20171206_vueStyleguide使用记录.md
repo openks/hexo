@@ -1,3 +1,11 @@
+---
+title: vueStyleguide使用记录
+date: 2017-12-06 15:44:15  
+description:  vueStyleguide使用记录
+---
+
+# vueStyleguide使用记录
+
 一个多月前研究过这个东西但是忘记记录了，现在开新项目需要重新搭建的时候发现没有做记录，只能从代码里找，实在不方便
 该项目的[github](https://github.com/vue-styleguidist/vue-styleguidist)
 1.安装`vue-styleguidist`

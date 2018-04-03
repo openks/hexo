@@ -1,3 +1,10 @@
+---
+title: vue-storybook搭建及使用
+date: 2017-10-30 15:44:15  
+description:  vue-storybook搭建及使用
+---
+
+
 前段时间在群里看到有小伙伴发了storyBook的github[连接](https://github.com/storybooks/storybook)
 自己看了下得知这是一个ui组件开发环境，考虑了下是很好用的，如果项目中UI组件越来越多管理起来势必会越来越麻烦  
 storybook以可视化的方式让你可以安然处理自己的组件  

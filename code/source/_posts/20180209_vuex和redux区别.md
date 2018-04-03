@@ -1,3 +1,11 @@
+---
+title: vuex和redux区别 
+date: 2018-02-09 15:44:19  
+description:  vuex和redux区别 
+---
+
+# vuex和redux区别 
+
 vuex和redux区别  
 1. vuex的store是手工创建的，redux的store是由createStore协助创建   
   rudex只会创建需要的字段，而vuex可能创建出未用到的字段，或遗漏某些需要字段即会出现State里没有声明，但是会直接使用的情况   

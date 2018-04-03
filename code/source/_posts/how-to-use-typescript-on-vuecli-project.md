@@ -1,7 +1,6 @@
-
 ---
 title: 如何在vuecli项目里使用typescript
-date: 2017年09月15日18:08:18
+date: 2017-09-15 18:08:18
 tags: [vue]
 categories: [前端]
 description: 教你如何在vuecli项目里使用typescript

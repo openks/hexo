@@ -1,3 +1,10 @@
+---
+title: vue-loader使用css-module方法
+date: 2017-10-31 15:44:15  
+description:  vue-loader使用css-module方法
+---
+
+
 vue-loader使用css-module方法
 简易版
 ```

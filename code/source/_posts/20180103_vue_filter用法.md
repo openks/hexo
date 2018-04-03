@@ -1,3 +1,11 @@
+---
+title: vue_filter的用法
+date: 2018-01-03 15:44:19  
+description:  vue_filter的用法
+---
+
+# vue_filter的用法
+
 **需求：**  
 vue中，除了在模板中使用过滤器，有时候，methods中也需要使用filters中的过滤器，如何调用  
 **解决方案：**  

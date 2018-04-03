@@ -1,4 +1,9 @@
-## 如何理解redux的middleware中间件
+---
+title: 如何理解redux的middleware中间件
+date: 2018-03-09 15:44:18  
+description:  如何理解redux的middleware中间件
+---
+# 如何理解redux的middleware中间件
 如果需要在dispatch前后分别打印出action,和action后的state，我们需要怎么做
 实现方案如下：  
 首先我们想到在前后分别添加console,每次调用都在调用前后加console  

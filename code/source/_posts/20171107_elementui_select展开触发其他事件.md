@@ -1,3 +1,10 @@
+---
+title: elementui_select展开触发其他事件
+date: 2017-11-07 15:44:15  
+description:  elementui_select展开触发其他事件
+---
+
+# elementui_select展开触发其他事件
 最近同事做到一个需求，页面有多个el-select每个el-select点开后需要向下拉框里添加不同的内容<br>
 想写一个统一的方法用于处理这种情况，不用每个下拉框的`@visible-change`事件单独写一个函数<br>
 结果发现`@visible-change`默认接受一个参数无法修改<br>

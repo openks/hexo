@@ -1,6 +1,6 @@
 ---
 title: 读airbnb标准有感  
-date: 2017年06月07日15:06:57  
+date: 2017-06-07 15:06:57 
 description: 读airbnb标准有感  
 keywords: [js标准,airbnb标准]  
 ---

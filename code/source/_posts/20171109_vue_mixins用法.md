@@ -1,3 +1,10 @@
+---
+title: vue_mixins用法
+date: 2017-11-09 15:44:15  
+description:  vue_mixins用法
+---
+
+
 看到过mixins但是一直没用过，后来发现他是这么用的
 ```js
 var mixin = {

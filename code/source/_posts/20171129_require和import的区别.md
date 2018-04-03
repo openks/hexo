@@ -1,3 +1,11 @@
+---
+title: require和import的区别
+date: 2017-11-29 15:44:15  
+description:  require和import的区别
+---
+
+# require和import的区别
+
 今天同事问我require和import的区别   
 其实这个我也不确定  
 
