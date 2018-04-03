@@ -10,7 +10,7 @@ fi
 
 rev=$(git rev-parse --short HEAD)
 
-cd ../public
+cd public
 
 git init
 git config user.name "openks"
