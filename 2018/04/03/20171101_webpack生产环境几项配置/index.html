@@ -1,0 +1,338 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>朱阳星的日常</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="朱阳星">
+    
+    <meta name="description" content="1.关闭console只需修改webpack的配置文件即可关闭生产环境console123456789//build/webpack.prod.env.jsnew webpack.optimize.UglifyJsPlugin(&amp;#123;  compress: &amp;#123;    warnings">
+    
+    
+    
+    
+    <link rel="alternate" href="/atom.xml" title="朱阳星的日常" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/hexo/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/hexo/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/hexo/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/hexo/css/style.css">
+    
+<script type="text/javascript">
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?a0056a3043f21f699150e6a4b66104ef";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</head>
+
+  <body>
+    <header>
+      <div>
+	
+		<div id="imglogo">
+			<a href="/hexo/"><img src="/hexo/img/logo.svg" alt="朱阳星的日常" title="朱阳星的日常"/></a>
+		</div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/hexo/" title="朱阳星的日常">朱阳星的日常</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar">
+				<a class="navbutton navmobile" href="#" title="菜单">
+				</a>
+			</div>
+			<nav class="animated">
+				<ul>
+					
+						<li>
+							<a href="/">
+								首页
+							</a>
+						</li>
+						
+						<li>
+							<a href="/archives">
+								存档
+							</a>
+						</li>
+						
+						<li>
+							<a href="/demo.html">
+								栗子
+							</a>
+						</li>
+						
+							<li>
+								
+										<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+											<label>Search</label>
+											<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+											<input type="hidden" name="q" value="site:www.zhuyangxing.cn">
+										</form>
+										
+							</li>
+				</ul>
+			</nav>
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/hexo/2018/04/03/20171101_webpack生产环境几项配置/" title="" itemprop="url"></a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://www.zhuyangxing.cn" title="朱阳星">朱阳星</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2018-04-03T08:34:07.867Z" itemprop="datePublished">2018-04-03 08:34</time>
+    <!-- 更新日期:<time datetime="2018-04-03T08:34:07.867Z" itemprop="dateModified">2018-04-03 08:34</time>
+     -->
+  </p>
+</header>
+
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-关闭console"><span class="toc-number">1.</span> <span class="toc-text">1.关闭console</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-启用webpack-externals"><span class="toc-number">2.</span> <span class="toc-text">2.启用webpack-externals</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-webpack生成hash值长度控制"><span class="toc-number">3.</span> <span class="toc-text">3.webpack生成hash值长度控制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-开启gzip（默认小于1k不开启）"><span class="toc-number">4.</span> <span class="toc-text">4.开启gzip（默认小于1k不开启）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-生产环境关闭sourcemap"><span class="toc-number">5.</span> <span class="toc-text">5.生产环境关闭sourcemap</span></a></li></ol>
+		</div>
+		
+		<h2 id="1-关闭console"><a href="#1-关闭console" class="headerlink" title="1.关闭console"></a>1.关闭console</h2><p>只需修改webpack的配置文件即可关闭生产环境console<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//build/webpack.prod.env.js</span></span><br><span class="line"><span class="keyword">new</span> webpack.optimize.UglifyJsPlugin(&#123;</span><br><span class="line">  compress: &#123;</span><br><span class="line">    warnings: <span class="literal">false</span>,</span><br><span class="line">    drop_console: <span class="literal">true</span>,<span class="comment">//默认关闭所有console</span></span><br><span class="line">    pure_funcs: [<span class="string">'console.log'</span>]<span class="comment">//配置需关闭的console 如果不配置默认关闭全部 如果配置则只关闭已经配置的</span></span><br><span class="line">  &#125;,</span><br><span class="line">  sourceMap: <span class="literal">false</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>相关连接：<br><a href="https://jeffjade.com/2017/08/06/124-webpack-packge-optimization-for-volume/" target="_blank" rel="noopener">https://jeffjade.com/2017/08/06/124-webpack-packge-optimization-for-volume/</a><br><a href="https://github.com/mishoo/UglifyJS2/tree/harmony#compress-options" target="_blank" rel="noopener">webapck配置</a></p>
+<h2 id="2-启用webpack-externals"><a href="#2-启用webpack-externals" class="headerlink" title="2.启用webpack-externals"></a>2.启用webpack-externals</h2><p>在<code>index.html</code> 里添加<code>cdn</code>文件链接<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- index.html --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://unpkg.com/vue"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 引入样式 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"https://unpkg.com/element-ui/lib/theme-chalk/index.css"</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 引入组件库 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://unpkg.com/element-ui/lib/index.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://unpkg.com/vue-router/dist/vue-router.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// build/webpack.prod.conf.js增加externals即可</span></span><br><span class="line"><span class="comment">// 注意：想elementui和vue-router不能再使用use，否则依然会打包</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  entry: &#123;</span><br><span class="line">    app: <span class="string">'./src/main.js'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  externals: &#123;</span><br><span class="line">    <span class="comment">//key 是 require 的包名，value 是全局的变量。</span></span><br><span class="line">    <span class="string">'vue'</span>: <span class="string">'Vue'</span>,</span><br><span class="line">    <span class="string">'vue-router'</span>: <span class="string">'VueRouter'</span>,</span><br><span class="line">    <span class="string">'element-ui'</span>: <span class="string">'element-ui'</span></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3-webpack生成hash值长度控制"><a href="#3-webpack生成hash值长度控制" class="headerlink" title="3.webpack生成hash值长度控制"></a>3.webpack生成hash值长度控制</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">// build/webpack.prod.conf.js</span></span><br><span class="line"> <span class="comment">//只需将</span></span><br><span class="line">utils.assetsPath(<span class="string">'js/[name].[chunkhash].js'</span>)</span><br><span class="line"><span class="comment">//修改为即可 </span></span><br><span class="line">utils.assetsPath(<span class="string">'js/[name].[chunkhash:8].js'</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="4-开启gzip（默认小于1k不开启）"><a href="#4-开启gzip（默认小于1k不开启）" class="headerlink" title="4.开启gzip（默认小于1k不开启）"></a>4.开启gzip（默认小于1k不开启）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//安装必须的插件</span><br><span class="line">npm install --save-dev compression-webpack-plugin</span><br></pre></td></tr></table></figure>
+<p>修改相关位置<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">--- a/config/index.js</span><br><span class="line">+++ b/config/index.js</span><br><span class="line">@@ <span class="number">-17</span>,<span class="number">7</span> +<span class="number">17</span>,<span class="number">7</span> @@ <span class="built_in">module</span>.exports = &#123;</span><br><span class="line">     <span class="comment">// Surge or Netlify already gzip all static assets for you.</span></span><br><span class="line">     <span class="comment">// Before setting to `true`, make sure to:</span></span><br><span class="line">     <span class="comment">// npm install --save-dev compression-webpack-plugin</span></span><br><span class="line">-    productionGzip: <span class="literal">true</span>,</span><br><span class="line">+    productionGzip: <span class="literal">false</span>,</span><br><span class="line">     productionGzipExtensions: [<span class="string">'js'</span>, <span class="string">'css'</span>],</span><br><span class="line">     <span class="comment">// Run the build command with an extra argument to</span></span><br><span class="line">     <span class="comment">// View the bundle analyzer report after build finishes:</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="5-生产环境关闭sourcemap"><a href="#5-生产环境关闭sourcemap" class="headerlink" title="5.生产环境关闭sourcemap"></a>5.生产环境关闭sourcemap</h2><p>默认生产环境的sourcemap是打开的<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">--- a/build/webpack.prod.conf.js</span><br><span class="line">+++ b/build/webpack.prod.conf.js</span><br><span class="line">@@ <span class="number">-36</span>,<span class="number">7</span> +<span class="number">36</span>,<span class="number">7</span> @@ <span class="keyword">const</span> webpackConfig = merge(baseWebpackConfig, &#123;</span><br><span class="line">         warnings: <span class="literal">false</span>,</span><br><span class="line">         drop_console: <span class="literal">true</span></span><br><span class="line">       &#125;,</span><br><span class="line">-      sourceMap: <span class="literal">false</span></span><br><span class="line">+      sourceMap: <span class="literal">true</span></span><br><span class="line">     &#125;),</span><br><span class="line">     <span class="comment">// extract css into its own file</span></span><br><span class="line">     <span class="keyword">new</span> ExtractTextPlugin(&#123;</span><br></pre></td></tr></table></figure></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <!--<div data-url="http://www.zhuyangxing.cn/2018/04/03/20171101_webpack生产环境几项配置/" data-title="朱阳星的日常" data-tsina="null" class="share clearfix">
+  </div>-->
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/hexo/2018/04/03/20171102_项目使用stylelint——stylefmt/" title="">
+  <strong>上一篇:</strong><br/>
+  <span>
+  (no title)</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/hexo/2018/04/03/20171206-精进_如何成为一个很厉害的人_读书笔记/"  title="">
+ <strong>下一篇:</strong><br/> 
+ <span>(no title)
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-关闭console"><span class="toc-number">1.</span> <span class="toc-text">1.关闭console</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-启用webpack-externals"><span class="toc-number">2.</span> <span class="toc-text">2.启用webpack-externals</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-webpack生成hash值长度控制"><span class="toc-number">3.</span> <span class="toc-text">3.webpack生成hash值长度控制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-开启gzip（默认小于1k不开启）"><span class="toc-number">4.</span> <span class="toc-text">4.开启gzip（默认小于1k不开启）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-生产环境关闭sourcemap"><span class="toc-number">5.</span> <span class="toc-text">5.生产环境关闭sourcemap</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			<li><a href="/hexo/tags/css/" title="css">css<sup>1</sup></a></li>
+		
+			<li><a href="/hexo/tags/hexo/" title="hexo">hexo<sup>2</sup></a></li>
+		
+			<li><a href="/hexo/tags/vue/" title="vue">vue<sup>1</sup></a></li>
+		
+			<li><a href="/hexo/tags/前端/" title="前端">前端<sup>15</sup></a></li>
+		
+			<li><a href="/hexo/tags/工具/" title="工具">工具<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/hexo/archives">归档</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/hexo/archives/2018/04/">四月 2018</a><span class="archive-list-count">46</span></li><li class="archive-list-item"><a class="archive-list-link" href="/hexo/archives/2017/06/">六月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/hexo/archives/2017/05/">五月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/hexo/archives/2017/03/">三月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/hexo/archives/2017/01/">一月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/hexo/archives/2016/11/">十一月 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/hexo/archives/2016/10/">十月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/hexo/archives/2016/09/">九月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/hexo/archives/2016/08/">八月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/hexo/archives/2016/06/">六月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/hexo/archives/2016/05/">五月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/hexo/archives/2016/04/">四月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/hexo/archives/2016/03/">三月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/hexo/archives/2016/02/">二月 2016</a><span class="archive-list-count">4</span></li></ul>
+  </div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+      <li><a href="http://www.zhangxinxu.com" target="_blank" title="张鑫旭">张鑫旭</a></li>
+      <li><a href="http://hexo.io" target="_blank" title="Hexo">Hexo</a></li>
+    </ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer">
+			<div class="bottom">
+				<div class="word">
+					Copyright 2015 zhuyangxing.cn AllRights Reserved.
+				</div>
+			</div>
+		<script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=10861255704412712674' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+</div>
+</footer>
+    <script src="/hexo/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>

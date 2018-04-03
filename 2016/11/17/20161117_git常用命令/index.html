@@ -1,0 +1,483 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>git常用命令 | 朱阳星的日常</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="朱阳星">
+    
+    <meta name="description" itemprop="description" content="git常用命令记录">
+    
+    <meta name="keywords" content="前端,git,git命令">
+    
+    
+    <link rel="alternate" href="/atom.xml" title="朱阳星的日常" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/hexo/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/hexo/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/hexo/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/hexo/css/style.css">
+    
+<script type="text/javascript">
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?a0056a3043f21f699150e6a4b66104ef";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</head>
+
+  <body>
+    <header>
+      <div>
+	
+		<div id="imglogo">
+			<a href="/hexo/"><img src="/hexo/img/logo.svg" alt="朱阳星的日常" title="朱阳星的日常"/></a>
+		</div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/hexo/" title="朱阳星的日常">朱阳星的日常</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar">
+				<a class="navbutton navmobile" href="#" title="菜单">
+				</a>
+			</div>
+			<nav class="animated">
+				<ul>
+					
+						<li>
+							<a href="/">
+								首页
+							</a>
+						</li>
+						
+						<li>
+							<a href="/archives">
+								存档
+							</a>
+						</li>
+						
+						<li>
+							<a href="/demo.html">
+								栗子
+							</a>
+						</li>
+						
+							<li>
+								
+										<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+											<label>Search</label>
+											<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+											<input type="hidden" name="q" value="site:www.zhuyangxing.cn">
+										</form>
+										
+							</li>
+				</ul>
+			</nav>
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/hexo/2016/11/17/20161117_git常用命令/" title="git常用命令" itemprop="url">git常用命令</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://www.zhuyangxing.cn" title="朱阳星">朱阳星</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2016-11-17T13:21:35.000Z" itemprop="datePublished">2016-11-17 13:21</time>
+    <!-- 更新日期:<time datetime="2018-04-03T08:34:07.867Z" itemprop="dateModified">2018-04-03 08:34</time>
+     -->
+  </p>
+</header>
+
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#git-log-命令"><span class="toc-number">1.</span> <span class="toc-text">git log 命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#git-log-n"><span class="toc-number">1.0.1.</span> <span class="toc-text">git log -n</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#git-log-–stat-n"><span class="toc-number">1.0.2.</span> <span class="toc-text">git log –stat -n</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#git-log-–pretty-format-”-“"><span class="toc-number">1.0.3.</span> <span class="toc-text">git log –pretty=format:” “</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-Commit-message"><span class="toc-number">2.</span> <span class="toc-text">git Commit message</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-issues"><span class="toc-number">3.</span> <span class="toc-text">git issues</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-branch"><span class="toc-number">4.</span> <span class="toc-text">git branch</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-config"><span class="toc-number">5.</span> <span class="toc-text">git config</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#git仓库备份"><span class="toc-number">5.1.</span> <span class="toc-text">git仓库备份</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git一次提交到两个仓库"><span class="toc-number">5.2.</span> <span class="toc-text">git一次提交到两个仓库</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-文件对比"><span class="toc-number">6.</span> <span class="toc-text">git 文件对比</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#git-Tag"><span class="toc-number">6.1.</span> <span class="toc-text">git Tag</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-patch"><span class="toc-number">6.2.</span> <span class="toc-text">git patch</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#把gitbash的编辑器设置为其他文本编辑器"><span class="toc-number">7.</span> <span class="toc-text">把gitbash的编辑器设置为其他文本编辑器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查看本地rebase之前的提交记录"><span class="toc-number">8.</span> <span class="toc-text">查看本地rebase之前的提交记录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何查看某次提交修改的文件有哪些"><span class="toc-number">9.</span> <span class="toc-text">如何查看某次提交修改的文件有哪些</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#以图表格式显示提交记录"><span class="toc-number">10.</span> <span class="toc-text">以图表格式显示提交记录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#比对最近几次已经commit代码改动内容"><span class="toc-number">11.</span> <span class="toc-text">比对最近几次已经commit代码改动内容</span></a></li></ol>
+		</div>
+		
+		<h2 id="git-log-命令"><a href="#git-log-命令" class="headerlink" title="git log 命令"></a>git log 命令</h2><h4 id="git-log-n"><a href="#git-log-n" class="headerlink" title="git log -n"></a>git log -n</h4><p>显示前N条日志</p>
+<h4 id="git-log-–stat-n"><a href="#git-log-–stat-n" class="headerlink" title="git log –stat -n"></a>git log –stat -n</h4><p>显示简要的增改行数统计,每次提交文件的变更统计</p>
+<h4 id="git-log-–pretty-format-”-“"><a href="#git-log-–pretty-format-”-“" class="headerlink" title="git log –pretty=format:” “"></a>git log –pretty=format:” “</h4><table>
+<thead>
+<tr>
+<th>选项</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>%H</td>
+<td>提交对象（commit）的完整哈希字串   </td>
+</tr>
+<tr>
+<td>%h</td>
+<td>提交对象的简短哈希字串  </td>
+</tr>
+<tr>
+<td>%T</td>
+<td>树对象（tree）的完整哈希字串  </td>
+</tr>
+<tr>
+<td>%t</td>
+<td>树对象的简短哈希字串  </td>
+</tr>
+<tr>
+<td>%P</td>
+<td>父对象（parent）的完整哈希字串  </td>
+</tr>
+<tr>
+<td>%p</td>
+<td>父对象的简短哈希字串  </td>
+</tr>
+<tr>
+<td>%an</td>
+<td>作者（author）的名字  </td>
+</tr>
+<tr>
+<td>%ae</td>
+<td>作者的电子邮件地址  </td>
+</tr>
+<tr>
+<td>%ad</td>
+<td>作者修订日期（可以用 -date= 选项定制格式）  </td>
+</tr>
+<tr>
+<td>%ar</td>
+<td>作者修订日期，按多久以前的方式显示  </td>
+</tr>
+<tr>
+<td>%cn</td>
+<td>提交者(committer)的名字  </td>
+</tr>
+<tr>
+<td>%ce</td>
+<td>提交者的电子邮件地址  </td>
+</tr>
+<tr>
+<td>%cd</td>
+<td>提交日期  </td>
+</tr>
+<tr>
+<td>%cr</td>
+<td>提交日期，按多久以前的方式显示  </td>
+</tr>
+<tr>
+<td>%s</td>
+<td>提交说明  </td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">git log --pretty=format:&quot; %s&quot; -3</span><br><span class="line">test:add new question add question6</span><br><span class="line">test:add new question add question5</span><br><span class="line">test:add new question</span><br><span class="line">//命令好用，起个别名</span><br><span class="line">git config alias.logs &quot;log --pretty=format:&apos;%s&apos;&quot;</span><br><span class="line">// 以后就可以使用如下命令，命令结果和上面一条命令结果一样</span><br><span class="line">git logs -3</span><br><span class="line">// 某些文件或某个文件的最近3次记录</span><br><span class="line">git logs -3  static/*.html</span><br><span class="line">// 指定作者为&quot;BeginMan&quot;的所有提交</span><br><span class="line">git log --author=BeginMan</span><br><span class="line">// 指定关键字为“init”的所有提交</span><br><span class="line">git log --grep=init</span><br><span class="line">// 指定提交者为&quot;Jack&quot;的所有提交</span><br><span class="line">git log --committer=Jack</span><br><span class="line"></span><br><span class="line">//查看文件的修改记录 可以看到提交版本</span><br><span class="line">git log demo/js/propagation.js</span><br><span class="line">commit bdbcf6226b05207fc4d4a6b56ab566ff0744295e</span><br><span class="line">//回退到指定版本</span><br><span class="line">git reset bdbcf6226b05207fc4d4a6b56ab566ff0744295e demo/js/propagation.js</span><br></pre></td></tr></table></figure>
+<h2 id="git-Commit-message"><a href="#git-Commit-message" class="headerlink" title="git Commit message"></a>git Commit message</h2><p>Commit message 都包括三个部分：Header，Body 和 Footer。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;type&gt;(&lt;scope&gt;): &lt;subject&gt;</span><br><span class="line">// 空一行</span><br><span class="line">&lt;body&gt;</span><br><span class="line">// 空一行</span><br><span class="line">&lt;footer&gt;</span><br></pre></td></tr></table></figure></p>
+<p> Header部分只有一行，包括三个字段：type（必需）、scope（可选）和subject（必需）</p>
+<table>
+<thead>
+<tr>
+<th>type</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>feat</td>
+<td>新功能（feature）</td>
+</tr>
+<tr>
+<td>fix</td>
+<td>修补bug  </td>
+</tr>
+<tr>
+<td>docs</td>
+<td>文档（documentation）  </td>
+</tr>
+<tr>
+<td>style</td>
+<td>格式（不影响代码运行的变动）  </td>
+</tr>
+<tr>
+<td>refactor</td>
+<td>重构（即不是新增功能，也不是修改bug的代码变动）  </td>
+</tr>
+<tr>
+<td>test</td>
+<td>增加测试  </td>
+</tr>
+<tr>
+<td>chore</td>
+<td>构建过程或辅助工具的变动  </td>
+</tr>
+</tbody>
+</table>
+<p>scope用于说明 commit 影响的范围，比如数据层、控制层、视图层等等，视项目不同而不同。</p>
+<p>subject是 commit 目的的简短描述，不超过50个字符。</p>
+<blockquote>
+<p>以动词开头，使用第一人称现在时，比如change，而不是changed或changes<br>第一个字母小写<br>结尾不加句号（.）  </p>
+</blockquote>
+<p>总结：<code>commit message应包含type+&quot;:&quot;+subject</code></p>
+<h2 id="git-issues"><a href="#git-issues" class="headerlink" title="git issues"></a>git issues</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 关闭一个</span><br><span class="line">Closes #234</span><br><span class="line">// 关闭多个issue</span><br><span class="line">Closes #123, #245, #992</span><br></pre></td></tr></table></figure>
+<h2 id="git-branch"><a href="#git-branch" class="headerlink" title="git branch"></a>git branch</h2><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">查看所有分支(前面带*号的代表你当前工作目录所处的分支)</span><br><span class="line">git branch -a  </span><br><span class="line"></span><br><span class="line">创建test分支</span><br><span class="line">git branch test  </span><br><span class="line"></span><br><span class="line">切换到test分支</span><br><span class="line">git checkout test  </span><br><span class="line"></span><br><span class="line">删除本地test分支</span><br><span class="line">git branch -d test</span><br><span class="line"></span><br><span class="line">删除远程test分支</span><br><span class="line">git push origin --delete test</span><br><span class="line"></span><br><span class="line">合并分支(把test分支合并到master分支上)</span><br><span class="line">git checkout master</span><br><span class="line">git merge test</span><br><span class="line"></span><br><span class="line">把当前test分支提交到远程test分支</span><br><span class="line">git push origin test</span><br><span class="line"></span><br><span class="line">把本地所有分支提交到远程相对应的分支上</span><br><span class="line">git push</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//复制代码库到本地</span><br><span class="line">git clone http://<span class="number">192</span>.<span class="number">168</span>.<span class="number">1</span>.<span class="number">231</span>/group-two/jujusports-web.git</span><br><span class="line"></span><br><span class="line">//添加所有未添加的文件</span><br><span class="line">git add .</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//查看版本区别只显示文件名字</span><br><span class="line">git diff --name-only</span><br><span class="line"></span><br><span class="line">//git 查看某版本文件</span><br><span class="line">//git show 版本号 文件名</span><br><span class="line">git show <span class="number">33</span>e636914bf61536fe56d3872338f0087c1a1e5c static/order_undone.html</span><br><span class="line"></span><br><span class="line">//刚创建git需要添加分支</span><br><span class="line">git push -u origin master</span><br><span class="line"></span><br><span class="line">//git撤销用branch上代码覆盖本地仓库及本地工程</span><br><span class="line">git checkout routes/index.js</span><br><span class="line"></span><br><span class="line">git reset [--hard|soft|mixed|merge|keep]</span><br><span class="line">/*</span><br><span class="line">[&lt;commit&gt;或HEAD]：将当前的分支重设（reset）到指定的&lt;commit&gt;或者HEAD（默认，如果不显示指定commit，默认是HEAD，即最新的一次提交），并且根据[<span class="built_in">mode</span>]有可能更新index和working directory。<span class="built_in">mode</span>的取值可以是hard、soft、mixed、merged、keep。下面来详细说明每种模式的意义和效果。</span><br><span class="line">A). --hard：重设（reset） index和working directory，自从&lt;commit&gt;以来在working directory中的任何改变都被丢弃，并把HEAD指向&lt;commit&gt;。</span><br><span class="line">B). --soft：index和working directory中的内容不作任何改变，仅仅把HEAD指向&lt;commit&gt;。这个模式的效果是，执行完毕后，自从&lt;commit&gt;以来的所有改变都会显示在git status的"Changes to be committed"中。</span><br><span class="line">C).  --mixed：仅reset index，但是不reset working directory。这个模式是默认模式，即当不显示告知git reset模式时，会使用mixed模式。这个模式的效果是，working directory中文件的修改都会被保留，不会丢弃，但是也不会被标记成"Changes to be committed"，但是会打出什么还未被更新的报告。报告如下：</span><br><span class="line">引用</span><br><span class="line">Unstaged changes after reset:</span><br><span class="line">M Test.Scala</span><br><span class="line">M test.txt</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+<h2 id="git-config"><a href="#git-config" class="headerlink" title="git config"></a>git config</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name  openks</span><br><span class="line">git config --global user.email  zhuyangxing@foxmail.com</span><br><span class="line">//显示所有配置</span><br><span class="line">git config --list</span><br><span class="line">//保存git的用户名密码</span><br><span class="line">git config --global credential.helper store</span><br></pre></td></tr></table></figure>
+<p>git提交流程<br>为了保持提交记录的干净<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">// 从服务器拉代码</span><br><span class="line">git pull</span><br><span class="line">// 本地修改1</span><br><span class="line">git commit -am &quot;c1&quot;</span><br><span class="line">// 本地修改2</span><br><span class="line">git commit -am &quot;c2&quot;</span><br><span class="line">// 本地修改3</span><br><span class="line">git commit -am &quot;c3&quot;</span><br><span class="line">// 1,2,3修改为一个功能先合并提交 </span><br><span class="line">// 即本地rebase</span><br><span class="line">git rebase -i </span><br><span class="line">git rebase -i SHA1</span><br><span class="line">git rebase -i HEAD~5</span><br><span class="line">// 弹出编辑框 点击insert进入编辑模式 保留第一个pick 其他的pick改为s  然后esc :wq</span><br><span class="line">// 然后从远程服务器拉代码</span><br><span class="line">git pull</span><br><span class="line">//  如果不冲突则最好 直接push到服务器</span><br><span class="line">git push</span><br><span class="line">// 如果冲突则merage合并冲突</span><br><span class="line">git add .</span><br><span class="line">git commit -am &quot;合并&quot;</span><br><span class="line">// 再次rebase 重新合并代码</span><br><span class="line">git rebase </span><br><span class="line">// 然后再push到服务器 </span><br><span class="line">git push</span><br></pre></td></tr></table></figure></p>
+<h3 id="git仓库备份"><a href="#git仓库备份" class="headerlink" title="git仓库备份"></a>git仓库备份</h3><p>需求很简单<br>在<code>oschina</code>上做主要的代码，在<code>coding</code>做代码备份  </p>
+<ol>
+<li>首先在<code>oschina</code>和<code>coding</code>上分别创建项目<code>test_git_mirroe</code></li>
+<li>从<code>oschina</code>上<code>clone</code>代码<code>git clone https://git.oschina.net/openks/test_git_mirroe.git</code>  </li>
+<li>跳转到项目目录<code>cd test_git_mirroe</code>  </li>
+<li>添加coding的远程仓库<code>git remote add coding https://git.coding.net/zhuyangxing/test_git_mirroe.git</code>  </li>
+<li>提交<code>coding</code>做镜像代码<code>git push --mirror coding</code>  </li>
+<li>以后在<code>test_git_mirroe</code>上提交的代码都提交到<code>oschina</code>上  </li>
+<li>想要在<code>coding</code>上同步就执行<code>git push --mirror coding</code>即可  </li>
+</ol>
+<h3 id="git一次提交到两个仓库"><a href="#git一次提交到两个仓库" class="headerlink" title="git一次提交到两个仓库"></a>git一次提交到两个仓库</h3><p>修改<code>.git</code>文件夹下的<code>config</code>文件<br>在<code>fetch</code>下添加想要提交的其他<code>git</code>路径即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[remote &quot;origin&quot;]</span><br><span class="line">&nbsp;&nbsp;url = https://git.oschina.net/openks/test_git_mirroe.git</span><br><span class="line">&nbsp;&nbsp;fetch = +refs/heads/*:refs/remotes/origin/*</span><br><span class="line">&nbsp;&nbsp;url = new git url</span><br></pre></td></tr></table></figure></p>
+<h2 id="git-文件对比"><a href="#git-文件对比" class="headerlink" title="git 文件对比"></a>git 文件对比</h2><p>方法一：还是我最常用的命令行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff &lt;commitA&gt; &lt;commitB&gt; filename</span><br></pre></td></tr></table></figure>
+<p>方法二：在gitlab上对比查看  </p>
+<p>输入两个提交版本，会显示所有文件的版本差异相同的则不显示,具体如下图<br><img src="http://7xl9u9.com1.z0.glb.clouddn.com/WX20170602-140742@2x.png" alt="image"></p>
+<p>再上一张我没找到问题的文件对比图，这确实是什么都没改啊（加了class这个除外）<br><img src="http://7xl9u9.com1.z0.glb.clouddn.com/WX20170602-141302@2x.png" alt="image"></p>
+<h3 id="git-Tag"><a href="#git-Tag" class="headerlink" title="git Tag"></a>git Tag</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建tag</span></span><br><span class="line">git tag tagName -m <span class="string">"这里是tag相关信息"</span></span><br><span class="line"><span class="comment"># 创建安全tag 别人无法修改并覆盖该tag确保该tag是认证安全版本 建议使用</span></span><br><span class="line">git tag -s tagName -m <span class="string">"这里是tag相关信息"</span> </span><br><span class="line"><span class="comment"># 如果上面方法报错则使用下面方法</span></span><br><span class="line">git tag -u 这里是gpg用户名 tagName -m <span class="string">"这里是tag相关信息"</span></span><br><span class="line"><span class="comment"># 查看tag </span></span><br><span class="line"><span class="comment"># -l 显示tag名 </span></span><br><span class="line"><span class="comment"># -n 显示message</span></span><br><span class="line">git tag -l -n </span><br><span class="line"><span class="comment"># 删除Tag</span></span><br><span class="line">git tag -d tagName</span><br><span class="line"><span class="comment"># 删除远程tag</span></span><br><span class="line">git push origin --delete tag tagName</span><br><span class="line"><span class="comment"># 将本地所有标签一次性提交到git服务器</span></span><br><span class="line">git push origin –-tags </span><br><span class="line"><span class="comment"># 查看项目的tag验证信息</span></span><br><span class="line">git tag -v v1.0</span><br></pre></td></tr></table></figure>
+<p>关于GPG<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成GPG Key 根据提示选择加密方法 并输入相关信息即可</span></span><br><span class="line">gpg --gen-key</span><br><span class="line"><span class="comment"># 验证GPG Key是否生成成功</span></span><br><span class="line">gpg --list-keys</span><br><span class="line"><span class="comment"># 上边显示的是公钥，顺便也看一下与之匹配的私钥生成如何：</span></span><br><span class="line">gpg --list-secret-keys</span><br><span class="line"><span class="comment"># 然后就可以使用gpg加密你的tag了</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="git-patch"><a href="#git-patch" class="headerlink" title="git patch"></a>git patch</h3><p>git中的patch有两种：<br>一是用git diff生成的标准patch<br>二是用git format-patch生成的Git专用Patch<br>git format-patch生成的patch在文件的前面会有diff的信息，还有提交者，时间等等  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用git diff 生成patch (不建议)</span></span><br><span class="line">git diff SHA1 &gt; a.patch</span><br><span class="line"><span class="comment"># 先检查patch文件</span></span><br><span class="line">git apply --<span class="built_in">stat</span> a.patch</span><br><span class="line"><span class="comment"># 检查能否应用成功 </span></span><br><span class="line">git apply --check a.patch</span><br><span class="line"><span class="comment"># 打补丁</span></span><br><span class="line">git apply a.patch</span><br><span class="line">patch p1 &lt; a.patch </span><br><span class="line"><span class="comment"># 使用git format-patch 生成patc 建议）</span></span><br><span class="line">git format-patch SHA1 &gt; a.patch</span><br><span class="line"><span class="comment"># 先检查patch文件</span></span><br><span class="line">git apply --<span class="built_in">stat</span> a.patch</span><br><span class="line"><span class="comment"># 检查能否应用成功 </span></span><br><span class="line">git apply --check a.patch</span><br><span class="line"><span class="comment"># 打补丁 </span></span><br><span class="line"><span class="comment"># git am 必须使用的是用git format-patch 生成的patch文件来打补丁,</span></span><br><span class="line"><span class="comment"># 而不能是使用git diff生成的patch</span></span><br><span class="line"><span class="comment"># 使用-s或--signoff选项，可以commit信息中加入Signed-off-by信息</span></span><br><span class="line">git am --signoff &lt; a.patch</span><br></pre></td></tr></table></figure>
+<p><a href="http://note.youdao.com/yws/public/redirect/share?id=5f785b0976e591a76c962e0624feec5a&amp;type=false" target="_blank" rel="noopener">有道分享</a></p>
+<hr>
+<p>add 2018-01-17 10:42:13</p>
+<h2 id="把gitbash的编辑器设置为其他文本编辑器"><a href="#把gitbash的编辑器设置为其他文本编辑器" class="headerlink" title="把gitbash的编辑器设置为其他文本编辑器"></a>把gitbash的编辑器设置为其他文本编辑器</h2><p>git vim在rebase时经常崩溃并报如下错误<br>git rebase vim Caught deadly signal SEGV解决方案：<br>设置git的编辑器为notepad++（修改完后需关闭整个notepad++才可继续）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global core.editor \ &quot;&apos;C:/Program Files (x86)/Notepad++/notepad++.exe&apos;”</span><br></pre></td></tr></table></figure></p>
+<h2 id="查看本地rebase之前的提交记录"><a href="#查看本地rebase之前的提交记录" class="headerlink" title="查看本地rebase之前的提交记录"></a>查看本地rebase之前的提交记录</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//只在rebase的机器上能看到记录，从仓库拉下来的没有记录</span><br><span class="line">git reflog</span><br></pre></td></tr></table></figure>
+<hr>
+<p>add 2018-02-09 15:12:25</p>
+<h2 id="如何查看某次提交修改的文件有哪些"><a href="#如何查看某次提交修改的文件有哪些" class="headerlink" title="如何查看某次提交修改的文件有哪些"></a>如何查看某次提交修改的文件有哪些</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看从sha1开始最近 n次的提交改动了那些文件</span></span><br><span class="line"><span class="comment"># 每个文件加了几行减了几行</span></span><br><span class="line"><span class="comment"># git log sha1 --stat -n</span></span><br><span class="line">git <span class="built_in">log</span> 0a79d5f811403766e05a9ca906a463de5e85c957 --<span class="built_in">stat</span> -1</span><br></pre></td></tr></table></figure>
+<h2 id="以图表格式显示提交记录"><a href="#以图表格式显示提交记录" class="headerlink" title="以图表格式显示提交记录"></a>以图表格式显示提交记录</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#以图表方式查看各分支之间的关系</span></span><br><span class="line">git <span class="built_in">log</span> --graph --oneline</span><br></pre></td></tr></table></figure>
+<h2 id="比对最近几次已经commit代码改动内容"><a href="#比对最近几次已经commit代码改动内容" class="headerlink" title="比对最近几次已经commit代码改动内容"></a>比对最近几次已经commit代码改动内容</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 想查看几次就在head后面该为几</span></span><br><span class="line">git diff head~1</span><br><span class="line"><span class="comment"># 查看两次之间改动内容 也可以用sha1值</span></span><br><span class="line">git diff head~1 head~3</span><br></pre></td></tr></table></figure>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <!--<div data-url="http://www.zhuyangxing.cn/2016/11/17/20161117_git常用命令/" data-title="git常用命令 | 朱阳星的日常" data-tsina="null" class="share clearfix">
+  </div>-->
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/hexo/2016/11/19/工作中遇到的部分问题/" title="工作中遇到的部分问题">
+  <strong>上一篇:</strong><br/>
+  <span>
+  工作中遇到的部分问题</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/hexo/2016/11/17/express允许多个网站跨域访问/"  title="express允许多个网站跨域访问">
+ <strong>下一篇:</strong><br/> 
+ <span>express允许多个网站跨域访问
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#git-log-命令"><span class="toc-number">1.</span> <span class="toc-text">git log 命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#git-log-n"><span class="toc-number">1.0.1.</span> <span class="toc-text">git log -n</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#git-log-–stat-n"><span class="toc-number">1.0.2.</span> <span class="toc-text">git log –stat -n</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#git-log-–pretty-format-”-“"><span class="toc-number">1.0.3.</span> <span class="toc-text">git log –pretty=format:” “</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-Commit-message"><span class="toc-number">2.</span> <span class="toc-text">git Commit message</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-issues"><span class="toc-number">3.</span> <span class="toc-text">git issues</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-branch"><span class="toc-number">4.</span> <span class="toc-text">git branch</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-config"><span class="toc-number">5.</span> <span class="toc-text">git config</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#git仓库备份"><span class="toc-number">5.1.</span> <span class="toc-text">git仓库备份</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git一次提交到两个仓库"><span class="toc-number">5.2.</span> <span class="toc-text">git一次提交到两个仓库</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-文件对比"><span class="toc-number">6.</span> <span class="toc-text">git 文件对比</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#git-Tag"><span class="toc-number">6.1.</span> <span class="toc-text">git Tag</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-patch"><span class="toc-number">6.2.</span> <span class="toc-text">git patch</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#把gitbash的编辑器设置为其他文本编辑器"><span class="toc-number">7.</span> <span class="toc-text">把gitbash的编辑器设置为其他文本编辑器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查看本地rebase之前的提交记录"><span class="toc-number">8.</span> <span class="toc-text">查看本地rebase之前的提交记录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何查看某次提交修改的文件有哪些"><span class="toc-number">9.</span> <span class="toc-text">如何查看某次提交修改的文件有哪些</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#以图表格式显示提交记录"><span class="toc-number">10.</span> <span class="toc-text">以图表格式显示提交记录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#比对最近几次已经commit代码改动内容"><span class="toc-number">11.</span> <span class="toc-text">比对最近几次已经commit代码改动内容</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			<li><a href="/hexo/tags/css/" title="css">css<sup>1</sup></a></li>
+		
+			<li><a href="/hexo/tags/hexo/" title="hexo">hexo<sup>2</sup></a></li>
+		
+			<li><a href="/hexo/tags/vue/" title="vue">vue<sup>1</sup></a></li>
+		
+			<li><a href="/hexo/tags/前端/" title="前端">前端<sup>15</sup></a></li>
+		
+			<li><a href="/hexo/tags/工具/" title="工具">工具<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/hexo/archives">归档</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/hexo/archives/2018/04/">四月 2018</a><span class="archive-list-count">46</span></li><li class="archive-list-item"><a class="archive-list-link" href="/hexo/archives/2017/06/">六月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/hexo/archives/2017/05/">五月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/hexo/archives/2017/03/">三月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/hexo/archives/2017/01/">一月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/hexo/archives/2016/11/">十一月 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/hexo/archives/2016/10/">十月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/hexo/archives/2016/09/">九月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/hexo/archives/2016/08/">八月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/hexo/archives/2016/06/">六月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/hexo/archives/2016/05/">五月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/hexo/archives/2016/04/">四月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/hexo/archives/2016/03/">三月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/hexo/archives/2016/02/">二月 2016</a><span class="archive-list-count">4</span></li></ul>
+  </div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+      <li><a href="http://www.zhangxinxu.com" target="_blank" title="张鑫旭">张鑫旭</a></li>
+      <li><a href="http://hexo.io" target="_blank" title="Hexo">Hexo</a></li>
+    </ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer">
+			<div class="bottom">
+				<div class="word">
+					Copyright 2015 zhuyangxing.cn AllRights Reserved.
+				</div>
+			</div>
+		<script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=10861255704412712674' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+</div>
+</footer>
+    <script src="/hexo/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
