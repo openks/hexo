@@ -37,4 +37,5 @@ jobs:
           publish_branch: gh-pages
           user_name: openks
           user_email: zhuyangxing@foxmail.com
+          cname: www.zhuyangxing.cn
           commit_message: "rebuild pages at ${{ github.sha }}"
