@@ -27,7 +27,9 @@ jobs:
 
       - name: Generate static files
         working-directory: code
-        run: npx hexo generate
+        run: |
+          npx hexo clean
+          npx hexo generate
 
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v4
