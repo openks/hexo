@@ -1,0 +1,362 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>使用mongodb统计支付宝个人消费信息 | 朱阳星的日常</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="朱阳星">
+    
+    <meta name="description" itemprop="description" content="使用mongodb统计支付宝个人消费信息">
+    
+    
+    
+    
+    <link rel="alternate" href="/atom.xml" title="朱阳星的日常" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<script type="text/javascript">
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a0056a3043f21f699150e6a4b66104ef";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+  <body>
+    <header>
+      <div>
+	
+		<div id="imglogo">
+			<a href="/"><img src="/img/logo.svg" alt="朱阳星的日常" title="朱阳星的日常"/></a>
+		</div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="朱阳星的日常">朱阳星的日常</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar">
+				<a class="navbutton navmobile" href="#" title="菜单">
+				</a>
+			</div>
+			<nav class="animated">
+				<ul>
+					
+						<li>
+							<a href="/">
+								首页
+							</a>
+						</li>
+						
+						<li>
+							<a href="/archives">
+								存档
+							</a>
+						</li>
+						
+						<li>
+							<a href="/demo.html">
+								栗子
+							</a>
+						</li>
+						
+							<li>
+								
+										<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+											<label>Search</label>
+											<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+											<input type="hidden" name="q" value="site:www.zhuyangxing.cn">
+										</form>
+										
+							</li>
+				</ul>
+			</nav>
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/10/06/20171006_统计个人消费信息/" title="使用mongodb统计支付宝个人消费信息" itemprop="url">使用mongodb统计支付宝个人消费信息</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="https://www.zhuyangxing.cn" title="朱阳星">朱阳星</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2017-10-06T14:44:15.000Z" itemprop="datePublished">2017-10-06 14:44</time>
+    <!-- 更新日期:<time datetime="2026-06-20T07:58:44.785Z" itemprop="dateModified">2026-06-20 07:58</time>
+     -->
+  </p>
+</header>
+
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Q1-%E6%9F%A5%E7%9C%8B%E9%A5%BF%E4%BA%86%E4%B9%88%E7%9A%84%E8%8A%B1%E8%B4%B9"><span class="toc-number">1.</span> <span class="toc-text">Q1:查看饿了么的花费</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Q2-mongodb%E5%A6%82%E4%BD%95%E6%8C%89%E7%85%A7%E6%9F%90%E5%AD%97%E6%AE%B5%E5%81%9A%E5%A2%9E%E9%87%8F%E5%AF%BC%E5%85%A5"><span class="toc-number">2.</span> <span class="toc-text">Q2:mongodb如何按照某字段做增量导入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Q3-MongoDB%E6%9F%90%E5%88%97%E7%B1%BB%E5%9E%8B%E4%BF%AE%E6%94%B9-%E5%8E%9F%E7%B1%BB%E5%9E%8B%E4%B8%BAString%E4%BF%AE%E6%94%B9%E5%90%8E%E4%B8%BADate"><span class="toc-number">3.</span> <span class="toc-text">Q3:MongoDB某列类型修改(原类型为String修改后为Date)</span></a></li></ol>
+		</div>
+		
+		<p>把支付宝导出记录导入mongodb，然后通过数据库查数据<br>1.支付宝excel导入mongodb<br>搜索相关文档后得出mongodb可以导入csv格式的文件使用<a target="_blank" rel="noopener" href="https://docs.mongodb.com/manual/reference/program/mongoimport/index.html">mongoimport</a></p>
+<p>这边有个插曲：<br>在zsh中运行mongo命令时报错说<code>zsh: command not found: mongo</code><br>于是找到我的mongo安装目录<code>mongodb-osx-x86_64-3.4.0/bin</code><br>傻傻的像windows一样直接运行mongo结果依然报错<code>zsh: command not found: mongo</code>这不科学啊<br>找到原来记录说要用<code> ./mongo</code>命令才能执行。输入该命令Ok</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># pwd查看当前目录</span></span><br><span class="line">➜  bin <span class="built_in">pwd</span></span><br><span class="line">/mongodb-osx-x86_64-3.4.0/bin</span><br></pre></td></tr></table></figure>
+<p>mongo命令不能全局使用这怎么可以。。开搞让这个命令全局可用<br>其实也简单只需要把<code>mongodb-osx-x86_64-3.4.0/bin</code>目录放到PATH即可  </p>
+<blockquote>
+<p>1.打开 应用程序 -&gt; 实用工具 -&gt; 终端；<br>2.在终端中定位到自己用户的主目录，输入： cd ~；<br>3.创建一个空文件，输入：touch .bash_profile ；<br>4.编辑这个文件，输入：open .bash_profile ；<br>5.在这个文件中输入：export PATH&#x3D;${PATH}:&lt;文件目录&gt;；（将”&lt;文件目录&gt;”替换成自己想要的目录）<br>例如：export PATH&#x3D;${PATH}:mongodb-osx-x86_64-2.6.1&#x2F;bin（我把下载后的文件直接放到了根目录）;<br>6.如果需要添加其他的环境变量例如JAVA_HOME，可以输入：export JAVA_HOME&#x3D;&#x2F;Library&#x2F;Java&#x2F;Home ；<br>7.source .bash_profile重启终端，测试,这个时候就可以在用户主目录使用上面配置过的配置文件进行设置mongod –config &#x2F;mongodb&#x2F;etc&#x2F;mongod.conf 来启动数据库了，点击终端Commond+N打开一个新的终端，使用mongo命令来连接数据库，对数据库进行操作,比如：show dbs 显示所有的集合</p>
+</blockquote>
+<p>因为之前已经设置过了，不知道什么原因导致PATH重置，只需添加PATH并使用命令<code>source .bash_profile</code>重启终端即可</p>
+<p>继续mongoimport命令<br><code>mongoimport --db test --collection alipay  --file /Users/zyx/Downloads/alipay_record_20170925_1718_1.csv --type csv --headerline --mode upsert</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ mongoimport --db <span class="built_in">test</span> --collection alipay  --file  /Users/zyx/Downloads/alipay_record_20170925_1718_1.csv --<span class="built_in">type</span> csv --headerline --mode upsert</span><br><span class="line">2017-09-26T09:16:52.786+0800&nbsp;&nbsp;connected to: localhost</span><br><span class="line">2017-09-26T09:16:52.868+0800&nbsp;&nbsp;imported 107 documents</span><br></pre></td></tr></table></figure>
+<p>成功导入107条记录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; db.alipay.find().<span class="built_in">limit</span>(1).<span class="function"><span class="title">pretty</span></span>()</span><br><span class="line">&#123;</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;_id&quot;</span> : ObjectId(<span class="string">&quot;59c9aa8436b7bea4ae668f47&quot;</span>),</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;֧�������׼�¼��ϸ��ѯ&quot;</span> : <span class="string">&quot;�˺�:[zhuyangxing@sohu.com]&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>又出现两个错误<br>1.乱码<br>2.字段也不对啊<br>先删掉再重新导入  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; db.alipay.remove(&#123;&#125;)</span><br><span class="line">WriteResult(&#123; <span class="string">&quot;nRemoved&quot;</span> : 107 &#125;)</span><br></pre></td></tr></table></figure>
+<p><em><strong>务必删掉上面和下面的统计信息后导入</strong></em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ mongoimport --db <span class="built_in">test</span> --collection alipay  --file  /Users/zyx/Downloads/alipay_record_20170925_1718_2.csv --<span class="built_in">type</span> csv --headerline --mode upsert</span><br><span class="line">2017-09-26T09:26:56.260+0800&nbsp;&nbsp;connected to: localhost</span><br><span class="line">2017-09-26T09:26:56.284+0800&nbsp;&nbsp;imported 96 documents</span><br></pre></td></tr></table></figure>
+<p>再次进入mongo查看 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&gt; db.alipay.find().<span class="built_in">limit</span>(1).<span class="function"><span class="title">pretty</span></span>()</span><br><span class="line">&#123;</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;_id&quot;</span> : ObjectId(<span class="string">&quot;59c9ace036b7bea4ae669038&quot;</span>),</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;���׺�&quot;</span> : <span class="string">&quot;2017092421001004100535306063\t&quot;</span>,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;�̻�������&quot;</span> : <span class="string">&quot;02170924212541911944732481548288\t&quot;</span>,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;���״���ʱ��&quot;</span> : <span class="string">&quot;2017/9/24 21:25&quot;</span>,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;����ʱ��&quot;</span> : <span class="string">&quot;2017/9/24 21:25&quot;</span>,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;�����޸�ʱ��&quot;</span> : <span class="string">&quot;2017/9/24 21:25&quot;</span>,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;������Դ��&quot;</span> : <span class="string">&quot;���������������Ͱͺ��ⲿ�̼ң�&quot;</span>,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;����&quot;</span> : <span class="string">&quot;��ʱ���˽���&quot;</span>,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;���׶Է�&quot;</span> : <span class="string">&quot;�Ϻ����͹�������ס�����޾�Ӫ�����ɷ����޹�˾&quot;</span>,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;��Ʒ����&quot;</span> : <span class="string">&quot;���ͱ�����&quot;</span>,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;���Ԫ��&quot;</span> : 3915.34,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;��/֧&quot;</span> : <span class="string">&quot;֧��&quot;</span>,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;����״̬&quot;</span> : <span class="string">&quot;���׳ɹ�&quot;</span>,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;�����ѣ�Ԫ��&quot;</span> : 0,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;�ɹ��˿Ԫ��&quot;</span> : 0,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;��ע&quot;</span> : <span class="string">&quot;&quot;</span>,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;�ʽ�״̬&quot;</span> : <span class="string">&quot;��֧��&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2.发现字段对了但是乱码问题依旧存在<br>使用其他文本编辑器(nodepad++,editplus,atom等)选择字符集为GB312打开才正常显示，使用utf-8重新保存该csv文件并再次导入即可</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br></pre></td><td class="code"><pre><span class="line">&gt; db.alipay.find().<span class="built_in">limit</span>(1).<span class="function"><span class="title">pretty</span></span>()</span><br><span class="line">&#123;</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;_id&quot;</span> : ObjectId(<span class="string">&quot;59c9b1d536b7bea4ae6691f0&quot;</span>),</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;交易号&quot;</span> : <span class="string">&quot;2017092421001004100535306063\t&quot;</span>,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;商户订单号&quot;</span> : <span class="string">&quot;02170924212541911944732481548288\t&quot;</span>,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;交易创建时间&quot;</span> : <span class="string">&quot;2017/9/24 21:25&quot;</span>,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;付款时间&quot;</span> : <span class="string">&quot;2017/9/24 21:25&quot;</span>,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;最近修改时间&quot;</span> : <span class="string">&quot;2017/9/24 21:25&quot;</span>,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;交易来源地&quot;</span> : <span class="string">&quot;其他（包括阿里巴巴和外部商家）&quot;</span>,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;类型&quot;</span> : <span class="string">&quot;即时到账交易&quot;</span>,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;交易对方&quot;</span> : <span class="string">&quot;上海青客公共租赁住房租赁经营管理股份有限公司&quot;</span>,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;商品名称&quot;</span> : <span class="string">&quot;青客宝付款&quot;</span>,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;金额（元）&quot;</span> : 315.34,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;收/支&quot;</span> : <span class="string">&quot;支出&quot;</span>,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;交易状态&quot;</span> : <span class="string">&quot;交易成功&quot;</span>,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;服务费（元）&quot;</span> : 0,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;成功退款（元）&quot;</span> : 0,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;备注&quot;</span> : <span class="string">&quot;&quot;</span>,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;资金状态&quot;</span> : <span class="string">&quot;已支出&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 创建交易号的index，设置该列唯一 确保以后不会导入重复数据</span></span><br><span class="line">db.alipay.createIndex(&#123;</span><br><span class="line">  交易号: 1</span><br><span class="line">&#125;, &#123;</span><br><span class="line">  unique: <span class="literal">true</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">#查看都有那些交易方 </span></span><br><span class="line">db.alipay.distinct(<span class="string">&quot;交易对方&quot;</span>);</span><br><span class="line">[</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;上海青客公共租赁住房租赁经营管理股份有限公司&quot;</span>,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;沃尔玛大卖场(上海杨行分店)&quot;</span>,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;招商银行&quot;</span>,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;源顺家居专营店&quot;</span>,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;艺舟树下专卖店&quot;</span>,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;中联生活&quot;</span>,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;金牌外婆家(上海IAPM店)&quot;</span>,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;饿了么&quot;</span>,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;newbalance旗舰店&quot;</span>,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;美团/大众点评&quot;</span>,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;苏州冶金图书专营店&quot;</span>,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;天弘基金管理有限公司&quot;</span>,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;上海宝山宜家家居有限公司&quot;</span>,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;苏北蛋饼&quot;</span>,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;麦当劳(淮海中路APM餐厅)&quot;</span>,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;可的(黄兴二)&quot;</span>,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;深圳市丰巢科技有限公司&quot;</span>,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;开宗车品专营店&quot;</span>,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;艾魅嘉数码专营店&quot;</span>,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;辰辉家居专营店&quot;</span>,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;惠乐美生鲜超市&quot;</span>,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;上海市金山区魏达食品店&quot;</span>,</span><br><span class="line">&nbsp;&nbsp;<span class="string">&quot;农夫山泉股份有限公司&quot;</span>,</span><br><span class="line">]</span><br><span class="line"><span class="comment"># 查看id与金额</span></span><br><span class="line">db.alipay.find(&#123;&#125;, &#123;</span><br><span class="line">  <span class="string">&#x27;金额（元）&#x27;</span>: 1</span><br><span class="line">&#125;).pretty()</span><br><span class="line"><span class="comment"># 查看金额最低的5条记录</span></span><br><span class="line">db.alipay.find().<span class="built_in">limit</span>(5).<span class="built_in">sort</span>(&#123;</span><br><span class="line">  <span class="string">&#x27;金额（元）&#x27;</span>: 1</span><br><span class="line">&#125;).pretty()</span><br><span class="line"><span class="comment"># 查看金额最高的5条记录</span></span><br><span class="line">db.alipay.find().<span class="built_in">limit</span>(5).<span class="built_in">sort</span>(&#123;</span><br><span class="line">  <span class="string">&#x27;金额（元）&#x27;</span>: -1</span><br><span class="line">&#125;).pretty()</span><br><span class="line"><span class="comment"># 查查看在饿了么上买了几次</span></span><br><span class="line">db.alipay.count(&#123;<span class="string">&quot;交易对方&quot;</span>:<span class="string">&quot;饿了么&quot;</span>&#125;);</span><br><span class="line">5</span><br><span class="line"><span class="comment"># 顺便看看饿了么上花了多少钱</span></span><br><span class="line">db.alipay.aggregate([&#123;</span><br><span class="line">  <span class="variable">$match</span>: &#123;</span><br><span class="line">    交易对方: <span class="string">&quot;饿了么&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;, &#123;</span><br><span class="line">  <span class="variable">$group</span>: &#123;</span><br><span class="line">    _id: null,</span><br><span class="line">    total: &#123;</span><br><span class="line">      <span class="variable">$sum</span>: <span class="string">&#x27;$金额（ 元）&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;])</span><br><span class="line">&#123; <span class="string">&quot;_id&quot;</span> : null, <span class="string">&quot;total&quot;</span> : 0 &#125;</span><br><span class="line"><span class="comment"># 上面结果显示为0 大大出乎意料 仔细查找原因发现条件写错了(真是无比尴尬还让我找了好久原因) </span></span><br><span class="line"><span class="comment"># 详见Q1</span></span><br><span class="line">db.alipay.aggregate([&#123;</span><br><span class="line">  <span class="variable">$match</span>: &#123;</span><br><span class="line">    交易对方: <span class="string">&quot;饿了么&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;, &#123;</span><br><span class="line">  <span class="variable">$group</span>: &#123;</span><br><span class="line">    _id: null,</span><br><span class="line">    total: &#123;</span><br><span class="line">      <span class="variable">$sum</span>: <span class="string">&quot;$金额（元）&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;])</span><br><span class="line">&#123; <span class="string">&quot;_id&quot;</span> : null, <span class="string">&quot;total&quot;</span> : 131.7 &#125;</span><br><span class="line"><span class="comment"># 可以按交易方和金额归类总结</span></span><br><span class="line">db.alipay.aggregate([&#123;</span><br><span class="line">  <span class="variable">$group</span>: &#123;</span><br><span class="line">    _id: <span class="string">&#x27;$交易对方&#x27;</span>,</span><br><span class="line">    total: &#123;</span><br><span class="line">      <span class="variable">$sum</span>: <span class="string">&#x27;$金额（元）&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;])</span><br><span class="line"><span class="comment"># 显示所有商品名称用逗号分开</span></span><br><span class="line"><span class="comment"># 与sum类似的也有很多 详见 https://docs.mongodb.com/manual/reference/operator/aggregation-group/</span></span><br><span class="line">db.alipay.aggregate([&#123;</span><br><span class="line">  <span class="variable">$group</span>: &#123;</span><br><span class="line">    _id: <span class="string">&#x27;$交易对方&#x27;</span>,</span><br><span class="line">    total: &#123;</span><br><span class="line">      <span class="variable">$sum</span>: <span class="string">&#x27;$金额（元）&#x27;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    name: &#123;</span><br><span class="line">      <span class="variable">$addToSet</span>: <span class="string">&#x27;$商品名称&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;, &#123;</span><br><span class="line">  <span class="variable">$sort</span>: &#123;</span><br><span class="line">    total: -1</span><br><span class="line">  &#125;</span><br><span class="line">&#125;], &#123;</span><br><span class="line">  allowDiskUse: <span class="literal">true</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 只显示第一个商品名称</span></span><br><span class="line">db.alipay.aggregate([&#123;</span><br><span class="line">  <span class="variable">$group</span>: &#123;</span><br><span class="line">    _id: <span class="string">&#x27;$交易对方&#x27;</span>,</span><br><span class="line">    total: &#123;</span><br><span class="line">      <span class="variable">$sum</span>: <span class="string">&#x27;$金额（元）&#x27;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    name: &#123;</span><br><span class="line">      <span class="variable">$first</span>: <span class="string">&#x27;$商品名称&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;, &#123;</span><br><span class="line">  <span class="variable">$sort</span>: &#123;</span><br><span class="line">    total: -1</span><br><span class="line">  &#125;</span><br><span class="line">&#125;], &#123;</span><br><span class="line">  allowDiskUse: <span class="literal">true</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 根据时间段统计</span></span><br><span class="line">db.alipay.aggregate([&#123;</span><br><span class="line">  <span class="variable">$match</span>: &#123;</span><br><span class="line">    付款时间: &#123;</span><br><span class="line">      <span class="variable">$gt</span>: new Date(2017, 9, 10),</span><br><span class="line">      <span class="variable">$lt</span>: new Date(2017, 9, 20)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;, &#123;</span><br><span class="line">  <span class="variable">$group</span>: &#123;</span><br><span class="line">    _id: <span class="string">&#x27;$交易对方&#x27;</span>,</span><br><span class="line">    total: &#123;</span><br><span class="line">      <span class="variable">$sum</span>: <span class="string">&#x27;$金额（元）&#x27;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    name: &#123;</span><br><span class="line">      <span class="variable">$first</span>: <span class="string">&#x27;$商品名称&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;, &#123;</span><br><span class="line">  <span class="variable">$sort</span>: &#123;</span><br><span class="line">    total: -1</span><br><span class="line">  &#125;</span><br><span class="line">&#125;], &#123;</span><br><span class="line">  allowDiskUse: <span class="literal">true</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>查看下最近一年经过支付宝的消费情况<br>先导入数据<br><code>mongoimport --db test --collection alipay  --file /Users/zyx/Downloads/alipay_record_20170927_1409_2.csv --type csv --headerline --mode upsert</code></p>
+<h3 id="Q1-查看饿了么的花费"><a href="#Q1-查看饿了么的花费" class="headerlink" title="Q1:查看饿了么的花费"></a>Q1:查看饿了么的花费</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 顺便看看饿了么上花了多少钱</span></span><br><span class="line">db.alipay.aggregate([&#123;</span><br><span class="line">  <span class="variable">$match</span>: &#123;</span><br><span class="line">    交易对方: <span class="string">&quot;饿了么&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;, &#123;</span><br><span class="line">  <span class="variable">$group</span>: &#123;</span><br><span class="line">    _id: null,</span><br><span class="line">    total: &#123;</span><br><span class="line">      <span class="variable">$sum</span>: <span class="string">&#x27;$金额（ 元）&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;])</span><br><span class="line">&#123; <span class="string">&quot;_id&quot;</span> : null, <span class="string">&quot;total&quot;</span> : 0 &#125;</span><br><span class="line"><span class="comment"># 上面结果显示为0 大大出乎意料 仔细查找原因发现条件写错了(真是无比尴尬还让我找了好久原因) </span></span><br></pre></td></tr></table></figure>
+<p>结果怎么是0,明显又错了<br>查找了N久在官方文档上查到了<a target="_blank" rel="noopener" href="https://docs.mongodb.com/manual/reference/operator/aggregation/sum/index.html#non-numeric-or-non-existent-fields">相关信息</a><br>原因只有两种<br>1.全部都非数字返回0<br>2.该字段不存在返回0<br>我这次就是原因，找了N久发现可以按照该字段排序，而且该字段全部有值,但是返回的却是0<br>最后发现<em><strong>字段名错误</strong></em></p>
+<h3 id="Q2-mongodb如何按照某字段做增量导入"><a href="#Q2-mongodb如何按照某字段做增量导入" class="headerlink" title="Q2:mongodb如何按照某字段做增量导入"></a>Q2:mongodb如何按照某字段做增量导入</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建交易号的index，设置该列唯一</span></span><br><span class="line">db.alipay.createIndex(&#123;</span><br><span class="line">  交易号: 1</span><br><span class="line">&#125;, &#123;</span><br><span class="line">  unique: <span class="literal">true</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>只需要给某字段添加索引并设置唯一即可<br>再次导入相同交易号时就无法导入</p>
+<h3 id="Q3-MongoDB某列类型修改-原类型为String修改后为Date"><a href="#Q3-MongoDB某列类型修改-原类型为String修改后为Date" class="headerlink" title="Q3:MongoDB某列类型修改(原类型为String修改后为Date)"></a>Q3:MongoDB某列类型修改(原类型为String修改后为Date)</h3><p>根据付款时间段进行统计的时候发现没结果，仔细查看发现这个字段是字符串需要把字符串转成日期  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看该字段为字符串的个数 </span></span><br><span class="line"><span class="comment"># 至于$type 详见这里https://docs.mongodb.com/manual/reference/operator/query/type/index.html</span></span><br><span class="line"><span class="comment"># 根据数量判断表里该列数据全部都是字符串格式</span></span><br><span class="line">db.alipay.find(&#123;</span><br><span class="line">  <span class="string">&#x27;付款时间&#x27;</span>: &#123;</span><br><span class="line">    <span class="variable">$type</span>: 2</span><br><span class="line">  &#125;</span><br><span class="line">&#125;).count();</span><br><span class="line">96</span><br><span class="line">mkp</span><br><span class="line"><span class="comment"># 修改该列数据类型</span></span><br><span class="line">db.alipay.find(&#123;</span><br><span class="line">  <span class="string">&quot;付款时间&quot;</span>: &#123;</span><br><span class="line">    <span class="variable">$type</span>: 2</span><br><span class="line">  &#125;</span><br><span class="line">&#125;).forEach(</span><br><span class="line">  <span class="keyword">function</span> (x) &#123;</span><br><span class="line">    x.付款时间 = new Date(x.付款时间);</span><br><span class="line">    db.alipay.save(x);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br><span class="line"><span class="comment"># 再次查看该列数据类型为字符串的数据发现结果已经是0了</span></span><br><span class="line">db.alipay.find(&#123;<span class="string">&#x27;付款时间&#x27;</span>: &#123;<span class="variable">$type</span>: 2&#125;&#125;).count();</span><br><span class="line">0</span><br></pre></td></tr></table></figure>
+
+<p>*** 最后才发现一年的数据量其实也没多少 直接用excel的筛选求和更好 真不应该因为手里有🔨就把所有问题都看成钉子 ***</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <!--<div data-url="https://www.zhuyangxing.cn/2017/10/06/20171006_%E7%BB%9F%E8%AE%A1%E4%B8%AA%E4%BA%BA%E6%B6%88%E8%B4%B9%E4%BF%A1%E6%81%AF/" data-title="使用mongodb统计支付宝个人消费信息 | 朱阳星的日常" data-tsina="" class="share clearfix">
+  </div>-->
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2017/10/06/20171016_vue异步加载所需组件/" title="vue异步加载所需组件">
+  <strong>上一篇:</strong><br/>
+  <span>
+  vue异步加载所需组件</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2017/10/05/20171005_zsh添加path/"  title="mac设置全局PATH不起作用解决办法">
+ <strong>下一篇:</strong><br/> 
+ <span>mac设置全局PATH不起作用解决办法
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Q1-%E6%9F%A5%E7%9C%8B%E9%A5%BF%E4%BA%86%E4%B9%88%E7%9A%84%E8%8A%B1%E8%B4%B9"><span class="toc-number">1.</span> <span class="toc-text">Q1:查看饿了么的花费</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Q2-mongodb%E5%A6%82%E4%BD%95%E6%8C%89%E7%85%A7%E6%9F%90%E5%AD%97%E6%AE%B5%E5%81%9A%E5%A2%9E%E9%87%8F%E5%AF%BC%E5%85%A5"><span class="toc-number">2.</span> <span class="toc-text">Q2:mongodb如何按照某字段做增量导入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Q3-MongoDB%E6%9F%90%E5%88%97%E7%B1%BB%E5%9E%8B%E4%BF%AE%E6%94%B9-%E5%8E%9F%E7%B1%BB%E5%9E%8B%E4%B8%BAString%E4%BF%AE%E6%94%B9%E5%90%8E%E4%B8%BADate"><span class="toc-number">3.</span> <span class="toc-text">Q3:MongoDB某列类型修改(原类型为String修改后为Date)</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/css/" title="css">css<sup>1</sup></a></li>
+		
+			<li><a href="/tags/hexo/" title="hexo">hexo<sup>2</sup></a></li>
+		
+			<li><a href="/tags/vue/" title="vue">vue<sup>1</sup></a></li>
+		
+			<li><a href="/tags/前端/" title="前端">前端<sup>15</sup></a></li>
+		
+			<li><a href="/tags/工具/" title="工具">工具<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/archives">归档</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">4</span></li></ul>
+  </div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+      <li><a href="http://www.zhangxinxu.com" target="_blank" title="张鑫旭">张鑫旭</a></li>
+      <li><a href="http://hexo.io" target="_blank" title="Hexo">Hexo</a></li>
+    </ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer">
+			<div class="bottom">
+				<div class="word">
+					Copyright 2015 zhuyangxing.cn AllRights Reserved.
+				</div>
+			</div>
+		<script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'https://znsv.baidu.com/customer_search/api/js?sid=10861255704412712674' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
